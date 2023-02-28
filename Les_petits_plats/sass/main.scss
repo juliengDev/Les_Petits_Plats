@@ -1,10 +1,12 @@
+@import "./Utils/_variables";
 @import "./Utils/_functions";
 @import "./Utils/_mixins";
 @import "./Utils/_placeholders";
-@import "./Utils/_variables";
+@import "./Vendors/_vendors.scss";
+@import "./Base/_base.scss";
+@import "./Base/_listes.scss";
 @import "./Components/_components.scss";
 @import "./Layout/_layout.scss";
 @import "./Pages/_pages.scss";
 @import "./Themes/_themes.scss";
-@import "./Base/_base.scss";
-@import "./Vendors/_vendors.scss";
+
