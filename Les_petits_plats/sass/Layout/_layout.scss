@@ -1,3 +1,36 @@
 //layouts/ est le dossier où vous mettez vos blocs BEM qui contiennent ce qui est réutilisable,
 // par exemple un header pour les mises en page de grande taille ou un footer ;
 
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 42px 0 17px ;
+
+  &__logo {
+      width: 75px;
+    }
+  &__title {
+      font-family: 'DM Sans', sans-serif;
+      font-size: map-get($font-size,header-title);
+      font-weight: map-get($font-weight, bold);
+      text-align: center;
+      color: $header-title-color;
+    }
+}
+
+.search-bar {
+  position: relative;
+  max-width: 1240px;
+  &__input{
+    background-color: #E7E7E7;
+    font-family: 'Lato', sans-serif;
+    font-weight: map-get($font-weight, light);
+  }
+  &__icon {
+    position: absolute;
+    right: 20px;
+    top:50%;
+    transform: translateY(-50%);
+  }
+}
