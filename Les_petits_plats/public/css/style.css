@@ -13,21 +13,27 @@
   list-style-type: none;
 }
 
+textarea, input {
+  appearance: none;
+  outline: none;
+}
+
 .dropdown-menu {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 70px;
-  width: 200px;
+  width: 670px;
 }
 .dropdown-menu--ingredients {
   background-color: #3282F7;
 }
 .dropdown-menu__sort-input {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 0 25px;
-  width: 90%;
-  height: 90%;
-  text-align: left;
   background-color: transparent;
   border: none;
   color: #FFF;
@@ -40,6 +46,44 @@
 .dropdown-menu__sort-label {
   display: flex;
   align-items: center;
+}
+.dropdown-menu__options {
+  width: 100%;
+  position: absolute;
+  top: 65px;
+  left: 0;
+  padding-left: 0;
+  color: #FFF;
+  display: grid;
+  grid-template-rows: repeat(auto-fill, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+.dropdown-menu__options--ingredients {
+  background-color: #3282F7;
+}
+.dropdown-menu__options--appareils {
+  background-color: #68D9A4;
+}
+.dropdown-menu__options--ustensiles {
+  background-color: #ED6454;
+}
+.dropdown-menu__option-item {
+  font-size: 0.9rem;
+  padding: 10px 20px;
+  margin: 5px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.dropdown-menu__option-item--ingredients {
+  background-color: #3282F7;
+}
+.dropdown-menu__option-item--appareils {
+  background-color: #68D9A4;
+}
+.dropdown-menu__option-item--ustensiles {
+  background-color: #ED6454;
 }
 
 .header {
