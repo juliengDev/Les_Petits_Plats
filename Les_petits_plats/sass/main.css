@@ -18,6 +18,11 @@ textarea, input {
   outline: none;
 }
 
+.sort-inputs-container {
+  margin-top: 75px;
+  padding: 0;
+}
+
 .dropdown-menu {
   position: relative;
   display: flex;
@@ -41,7 +46,7 @@ textarea, input {
   font-size: 1.1rem;
 }
 .dropdown-menu__sort-input:hover {
-  cursor: pointer;
+  cursor: text;
 }
 .dropdown-menu__sort-label {
   display: flex;
@@ -61,6 +66,7 @@ textarea, input {
 }
 .dropdown-menu__options--ingredients {
   background-color: #3282F7;
+  border-radius: 0 0 5px 5px;
 }
 .dropdown-menu__options--appareils {
   background-color: #68D9A4;
@@ -84,6 +90,42 @@ textarea, input {
 }
 .dropdown-menu__option-item--ustensiles {
   background-color: #ED6454;
+}
+
+.card-container {
+  display: flex;
+  justify-content: space-between;
+}
+.card-container__card {
+  margin-top: 135px;
+  padding: 0;
+}
+.card-container__card--heading {
+  height: 180px;
+  width: 100%;
+}
+.card-container__card-body {
+  padding: 0;
+}
+.card-container__card-title {
+  display: flex;
+  background-color: #C7BEBE;
+  justify-content: space-between;
+  margin: 0;
+}
+.card-container__card-title-timer {
+  display: flex;
+}
+.card-container__card-title-timer i {
+  font-weight: 700px;
+}
+.card-container__card-title-timer p {
+  padding-left: 10px;
+}
+.card-container__card-description {
+  display: flex;
+  justify-content: space-between;
+  background-color: #E7E7E7;
 }
 
 .header {
