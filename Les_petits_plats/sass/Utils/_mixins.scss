@@ -1,32 +1,34 @@
 //Responsive
 $breakpoints: (
         smartphone: 576px,
+        mybreakpoint: 680px,
         tablet : 768px,
         big-tablet: 992px,
         computer : 1200px
 );
-.grid {
-  display: grid;
-  grid-gap: 0 30px;
-  grid-template-columns: repeat(1, 1fr);
-}
+
 // smartphone
 @mixin mobile-only {
-  @media screen and (min-width: map-get($breakpoints, smartphone)) {
-    @content;
+  @media only screen and (max-width: map-get($breakpoints, smartphone)) {
+    @content
   }
 }
-
+//My breakpoint
+@mixin my-breakpoint {
+  @media only screen and (max-width: map-get($breakpoints, mybreakpoint)) {
+    @content
+  }
+}
 // Tablet
 @mixin tablet-only {
-  @media screen and (min-width: map-get($breakpoints, tablet)) {
+  @media screen and (max-width: map-get($breakpoints, tablet)) {
     @content;
   }
 }
 
 // Bigger Tablet
 @mixin big-tablet-only {
-  @media screen and (min-width: map-get($breakpoints, big-tablet)) {
+  @media screen and (max-width: map-get($breakpoints, big-tablet)) {
     @content;
   }
 }

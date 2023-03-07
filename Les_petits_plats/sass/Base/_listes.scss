@@ -1,20 +1,20 @@
 //Typography
 $font-size: (
-  header-title: 2.1rem,
-  search-label: 1.1rem,
-  filter-label: 0.9rem,
-  dropdown-label: 1.1rem,
-  card-label: 1.1rem,
-  card-text-label: 0.8rem,
-  card-time-label: 1.1rem
+  header-title: 2.25rem,
+  search-label: 1.125rem,
+  filter-label: 0.875rem,
+  dropdown-label: 1.125rem,
+  card-label: 1.125rem,
+  card-text-label: 0.75rem,
+  card-time-label: 1.125rem
 );
 
 $font-weight: (
-  thin: 100px,
-  light: 300px,
-  regular: 400px,
-  bold: 700px,
-  black: 900px
+  thin: 100,
+  light: 300,
+  regular: 400,
+  bold: 700,
+  black: 900
 );
 
 $color: (
@@ -25,6 +25,5 @@ $color: (
   black: #555,
   grey: #C7BEBE,
   ligh-grey: #E7E7E7
-
 );
 

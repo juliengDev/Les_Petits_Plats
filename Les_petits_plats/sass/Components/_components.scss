@@ -1,7 +1,8 @@
 //components/ est utilisé pour ranger les blocs BEM qui sont plus indépendants, comme les boutons.
 
 .sort-inputs-container {
-  margin-top: 75px;
+  display: flex;
+  margin: 75px 0 20px 0;
   padding: 0;
 }
 //Dropdown Button
@@ -11,10 +12,18 @@
   justify-content: space-between;
   align-items: center;
   height: 70px;
-  width: 670px;
+  width: 170px;
+  margin-right: 20px;
+
     &--ingredients {
       background-color: map-get($color, blue);
     }
+    &--appliances {
+      background-color: map-get($color, green);
+    }
+    &--utensils {
+      background-color: map-get($color,orange);
+    };
     &__sort-input{
       display: flex;
       justify-content: space-between;
@@ -30,6 +39,8 @@
        }
     }
     &__sort-label{
+      position: absolute;
+      right: 15px;
       display: flex;
       align-items: center;
       }
@@ -72,43 +83,80 @@
         background-color: map-get($color,orange);
       }
     }
+  //&__extend {
+  //  width: 670px;
+  //}
 }
 
 
 //Cards
-.card-container {
+.cards-result-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+
+}
+.card-container {
+
   &__card {
-    margin-top: 135px;
     padding: 0;
-    &--heading {
-      height: 180px;
+    &-heading {
+      height: 178px;
+      background-color: #C7BEBE;
       width: 100%;
     }
     &-body{
       padding: 0;
+      background-color: #E7E7E7;
     }
     &-title {
       display: flex;
-      background-color: #C7BEBE;
       justify-content: space-between;
-      margin: 0;
+      align-items: center;
+      margin: 10px;
+        & h5 {
+          margin: 0;
+          font-weight: map-get($font-weight,regular);
+        }
        &-timer {
          display: flex;
+         justify-content: space-between;
+         align-items: center;
          & i {
            font-weight: map-get($font-weight,bold);
          }
          & p {
-           padding-left:10px;
+           font-size: map-get($font-size,card-time-label);
+           padding: 0 0 0 10px ;
+           margin-bottom: 0;
          }
        }
     }
     &-description{
+      margin-bottom: 30px;
       display: flex;
       justify-content: space-between;
-      background-color: #E7E7E7,
+      font-size: map-get($font-size,card-text-label);
 
+      & p {
+        margin:0;
+        padding: 0;
+      }
     }
   }
 }
+
+//grid
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(1,1fr);
+  gap: 50px;
+  @include my-breakpoint {
+    grid-template-columns: repeat(1, 1fr);
+    max-width: 380px;
+  };
+   &-item{
+     justify-self: center;
+   }
+}
+
