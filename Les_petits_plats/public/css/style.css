@@ -123,8 +123,9 @@ body {
   align-items: center;
   margin: 10px;
 }
-.card-container__card-title h5 {
+.card-container__card-title h2 {
   margin: 0;
+  font-size: 1.125rem;
   font-weight: 400;
 }
 .card-container__card-title-timer {
@@ -141,7 +142,7 @@ body {
   margin-bottom: 0;
 }
 .card-container__card-description {
-  margin-bottom: 30px;
+  margin: 0 5px 30px 5px;
   display: flex;
   justify-content: space-between;
   font-size: 0.75rem;
