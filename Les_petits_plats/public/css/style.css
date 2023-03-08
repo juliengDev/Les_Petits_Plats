@@ -59,8 +59,10 @@ body {
   right: 15px;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 .dropdown-menu__options {
+  z-index: 1;
   width: 100%;
   position: absolute;
   top: 65px;
@@ -99,6 +101,9 @@ body {
 .dropdown-menu__option-item--ustensiles {
   background-color: #ED6454;
 }
+.dropdown-menu__extend {
+  width: 670px;
+}
 
 .cards-result-container {
   display: flex;
@@ -108,7 +113,7 @@ body {
 .card-container__card {
   padding: 0;
 }
-.card-container__card-heading {
+.card-container__card-img {
   height: 178px;
   background-color: #C7BEBE;
   width: 100%;

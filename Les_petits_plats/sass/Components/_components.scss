@@ -43,8 +43,10 @@
       right: 15px;
       display: flex;
       align-items: center;
+      cursor: pointer;
       }
     &__options {
+      z-index: 1;
       width: 100%;
       position: absolute;
       top:65px;
@@ -55,6 +57,7 @@
       grid-template-rows: repeat(auto-fill,1fr);
       grid-template-columns: repeat(3,1fr);
       gap: 15px;
+
         &--ingredients {
           background-color: map-get($color,blue);
           border-radius: 0 0 5px 5px;
@@ -83,9 +86,9 @@
         background-color: map-get($color,orange);
       }
     }
-  //&__extend {
-  //  width: 670px;
-  //}
+  &__extend {
+    width: 670px;
+  }
 }
 
 
@@ -99,7 +102,7 @@
   &__card {
     padding: 0;
 
-    &-heading {
+    &-img {
       height: 178px;
       background-color: #C7BEBE;
       width: 100%;
