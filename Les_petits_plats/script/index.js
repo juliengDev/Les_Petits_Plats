@@ -1,13 +1,8 @@
 import {recipes} from "./recipes.js";
 
-
-
-
 // console.log(recipes)
 
-
 for (let recipe of recipes) {
-
 
      // Creation des elements HTML
      let cardContainer = document.querySelector('.card-container');
