@@ -17,6 +17,7 @@ body {
 }
 
 .sort-inputs-container {
+  max-width: 1300px;
   display: flex;
   margin: 75px 0 20px 0;
   padding: 0;
@@ -78,10 +79,10 @@ body {
   background-color: #3282F7;
   border-radius: 0 0 5px 5px;
 }
-.dropdown-menu__options--appareils {
+.dropdown-menu__options--appliances {
   background-color: #68D9A4;
 }
-.dropdown-menu__options--ustensiles {
+.dropdown-menu__options--utensils {
   background-color: #ED6454;
 }
 .dropdown-menu__option-item {
@@ -103,6 +104,7 @@ body {
 }
 .dropdown-menu__extend {
   width: 670px;
+  transition: width 450ms ease-out;
 }
 
 .cards-result-container {

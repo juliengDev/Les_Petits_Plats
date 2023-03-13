@@ -1,6 +1,7 @@
 //components/ est utilisé pour ranger les blocs BEM qui sont plus indépendants, comme les boutons.
 
 .sort-inputs-container {
+  max-width: 1300px;
   display: flex;
   margin: 75px 0 20px 0;
   padding: 0;
@@ -14,6 +15,7 @@
   height: 70px;
   width: 170px;
   margin-right: 20px;
+
 
     &--ingredients {
       background-color: map-get($color, blue);
@@ -62,10 +64,10 @@
           background-color: map-get($color,blue);
           border-radius: 0 0 5px 5px;
         }
-        &--appareils {
+        &--appliances {
           background-color: map-get($color,green);
         }
-        &--ustensiles {
+        &--utensils {
           background-color: map-get($color,orange);
         }
     }
@@ -88,6 +90,7 @@
     }
   &__extend {
     width: 670px;
+    transition: width 450ms ease-out;
   }
 }
 
@@ -96,6 +99,7 @@
 .cards-result-container {
   display: flex;
   justify-content: center;
+  //max-width: 1200px;
 
 }
 .card-container {

@@ -29,23 +29,18 @@
 <!--Injecter du code JS-->
             </div>
         </section>
-        <section class="sort-inputs-container" aria-label="Fltres de recherches">
+        <section class="sort-inputs-container" aria-label="Filtres de recherches">
             <div class="dropdown-menu  dropdown-menu--ingredients">
                 <input type="text" class="dropdown-menu__sort-input dropdown-menu__sort-input--ingredients"
                        placeholder=" Rechercher un ingrédient" value="Ingrédients" name="Ingrédients"
                        id="sort-by-ingredients">
-                <label for="sort-by-ingredients" class="dropdown-menu__sort-label">
-                    <svg width="16" height="11" viewBox="0 0 16 11" fill="none" xmlns="http://www.w3.org/2000/svg" id="sort-label-icon" class="main-index__sort-label-icon-svg">
+                <label for="sort-by-ingredients" id="dropdown-menu__sort-ingredient" class="dropdown-menu__sort-label">
+                    <svg width="16" height="11" viewBox="0 0 16 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="main-index__sort-label-icon-svg">
                         <path d="M14.12 0.453369L8 6.56004L1.88 0.453369L0 2.33337L8 10.3334L16 2.33337L14.12 0.453369Z" fill="white" />
                     </svg>
                 </label>
                 <ul class="dropdown-menu__options dropdown-menu__options--ingredients hide">
                     <!--                            Injecter ici via JS les tags-->
-                    <li class="dropdown-menu__option-item dropdown-menu__option-item--ingredients">Lait de coco</li>
-                    <li class="dropdown-menu__option-item dropdown-menu__option-item--ingredients">Jus de citron</li>
-                    <li class="dropdown-menu__option-item dropdown-menu__option-item--ingredients">Creme de coco</li>
-                    <li class="dropdown-menu__option-item dropdown-menu__option-item--ingredients">Sucre</li>
-                    <li class="dropdown-menu__option-item dropdown-menu__option-item--ingredients">Citron vert</li>
                 </ul>
 
             </div>
@@ -53,41 +48,31 @@
                 <input type="text" class="dropdown-menu__sort-input dropdown-menu__sort-input--appliances"
                        placeholder=" Rechercher un appareil" value="Appareils" name="Appareils"
                        id="sort-by-appareils">
-                <label for="sort-by-appareils" class="dropdown-menu__sort-label">
+                <label for="sort-by-appareils" id="dropdown-menu__sort-appliances" class="dropdown-menu__sort-label">
                     <svg width="16" height="11" viewBox="0 0 16 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="main-index__sort-label-icon-svg">
                         <path d="M14.12 0.453369L8 6.56004L1.88 0.453369L0 2.33337L8 10.3334L16 2.33337L14.12 0.453369Z" fill="white" />
                     </svg>
                 </label>
-                <div class="container">
-                    <ul class="dropdown-menu__options dropdown-menu__options--appliances hide">
+                <ul class="dropdown-menu__options dropdown-menu__options--appliances hide">
                         <!--                            Injecter ici via JS les tags-->
-                        <li class="dropdown-menu__option-item dropdown-menu__option-item--appliances">Lait de coco</li>
-                        <li class="dropdown-menu__option-item dropdown-menu__option-item--appliances">Jus de citron</li>
-                        <li class="dropdown-menu__option-item dropdown-menu__option-item--appliances">Creme de coco</li>
-                        <li class="dropdown-menu__option-item dropdown-menu__option-item--appliances">Sucre</li>
-                        <li class="dropdown-menu__option-item dropdown-menu__option-item--appliances">Citron vert</li>
-                    </ul>
-                </div>
+
+                </ul>
             </div>
             <div class="dropdown-menu dropdown-menu dropdown-menu--utensils">
                 <input type="text" class="dropdown-menu__sort-input dropdown-menu__sort-input--utensils"
                        placeholder=" Rechercher un ingrédient" value="Ustensiles" name="Ustensiles"
                        id="sort-by-utensils">
-                <label for="sort-by-utensils" class="dropdown-menu__sort-label">
+                <label for="sort-by-utensils" id="dropdown-menu__sort-ustensiles" class="dropdown-menu__sort-label">
                     <svg width="16" height="11" viewBox="0 0 16 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="main-index__sort-label-icon-svg">
                         <path d="M14.12 0.453369L8 6.56004L1.88 0.453369L0 2.33337L8 10.3334L16 2.33337L14.12 0.453369Z" fill="white" />
                     </svg>
                 </label>
-                <div class="container">
-                    <ul class="dropdown-menu__options dropdown-menu__options--utensils hide">
-                        <!--                            Injecter ici via JS les tags-->
-                        <li class="dropdown-menu__option-item dropdown-menu__option-item--utensils">Lait de coco</li>
-                        <li class="dropdown-menu__option-item dropdown-menu__option-item--utensils">Jus de citron</li>
-                        <li class="dropdown-menu__option-item dropdown-menu__option-item--utensils">Creme de coco</li>
-                        <li class="dropdown-menu__option-item dropdown-menu__option-item--utensils">Sucre</li>
-                        <li class="dropdown-menu__option-item dropdown-menu__option-item--utensils">Citron vert</li>
-                    </ul>
-                </div>
+
+                <ul class="dropdown-menu__options dropdown-menu__options--utensils hide">
+                    <!--                            Injecter ici via JS les tags-->
+
+                </ul>
+
             </div>
         </section>
         <section class="cards-result-container" role="region" aria-label="Recette trouvées">
@@ -99,6 +84,7 @@
 
     <script type="module" src="script/index.js"></script>
     <script src="script/functions/dropdown.js"></script>
+    <script src="script/functions.js"></script>
     <script src="https://kit.fontawesome.com/ac15f4689e.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>

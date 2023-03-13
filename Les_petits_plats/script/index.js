@@ -1,7 +1,15 @@
 import {recipes} from "./recipes.js";
 
+
+
+
+// console.log(recipes)
+
+
 for (let recipe of recipes) {
-     // Cree les elements HTML
+
+
+     // Creation des elements HTML
      let cardContainer = document.querySelector('.card-container');
 
      let cardContainerCards = document.createElement('div');
@@ -37,14 +45,43 @@ for (let recipe of recipes) {
      </div>
      </div>`;
 
+     const dropdownMenuIngredients = document.querySelector('.dropdown-menu__options--ingredients');
+     const dropdownMenuAppareils = document.querySelector('.dropdown-menu__options--appliances');
+     const dropdownMenuUstensiles = document.querySelector('.dropdown-menu__options--utensils');
 
+     const htmlIngredientsItem = document.createElement('li');
+     htmlIngredientsItem.classList.add("dropdown-menu__option-item","dropdown-menu__option-item--ingredients")
+     for (let ingredient of recipe.ingredients){
+          htmlIngredientsItem.innerText= ingredient.ingredient;
+     }
+
+     const htmlAppareilsItem = document.createElement('li');
+     htmlAppareilsItem.classList.add("dropdown-menu__option-item","dropdown-menu__options-item--appliances")
+     for (let appareil in recipe){
+          htmlAppareilsItem.innerText= recipe.appliance;
+     }
+
+     const htmlUstensilesItem = document.createElement('li');
+     htmlUstensilesItem.classList.add("dropdown-menu__option-item","dropdown-menu__options-item--utensils")
+     for (let ustensile of recipe.ustensils){
+          htmlUstensilesItem.innerText= ustensile;
+     }
+
+     //Ajout des elements HTML
      cardBody.innerHTML= htmlRecipes;
 
 // Insert HTML elements
+
+     // Partie Ingredients
      cardContainer.appendChild(cardContainerCards);
      cardContainerCards.appendChild(cardImage);
      cardContainerCards.appendChild(cardBody);
+     dropdownMenuIngredients.appendChild(htmlIngredientsItem);
+     dropdownMenuAppareils.appendChild(htmlAppareilsItem);
+     dropdownMenuUstensiles.appendChild(htmlUstensilesItem);
+     // Partie Appareils
 
+     // Partie Ustensiles
 }
 
 
