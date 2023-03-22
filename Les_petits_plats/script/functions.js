@@ -4,5 +4,6 @@ function getValue(){
     searchBarValues.push(input)
     console.log(searchBarValues)
 }
+// utilisation du rest parameter ici dans la fonction getValue()?
 
 

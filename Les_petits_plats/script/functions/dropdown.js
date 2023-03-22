@@ -1,40 +1,33 @@
-let dropdownMenuIngredients = document.querySelector(".dropdown-menu--ingredients");
-let dropdownMenuAppareils = document.querySelector(".dropdown-menu--appliances");
-let dropdownMenuUstensiles = document.querySelector(".dropdown-menu--utensils");
-
-let sortLabelIconIngredient = document.getElementById("dropdown-menu__sort-ingredient");
-let sortLabelIconAppareils = document.getElementById("dropdown-menu__sort-appliances");
-let sortLabelIconUstensiles = document.getElementById('dropdown-menu__sort-ustensiles');
-
-let listByIngredients = document.querySelector('.dropdown-menu__options--ingredients');
-let listByAppareils = document.querySelector(".dropdown-menu__options--appliances");
-let listByUstensiles = document.querySelector(".dropdown-menu__options--utensils");
+const sortLabelIconIngredient = document.getElementById("dropdown-menu__sort-ingredient");
+const sortLabelIconAppareils = document.getElementById("dropdown-menu__sort-appliances");
+const sortLabelIconUstensiles = document.getElementById('dropdown-menu__sort-ustensiles');
 
 sortLabelIconIngredient.addEventListener('click',toggleDropDownListIngredients);
 sortLabelIconAppareils.addEventListener('click',toggleDropDownListAppareils);
 sortLabelIconUstensiles.addEventListener('click',toggleDropDownListUstensiles);
 
 function toggleDropDownListIngredients() {
-
-    if(dropdownMenuIngredients.classList.contains('dropdown-menu')){
-        dropdownMenuIngredients.classList.toggle('dropdown-menu__extend')
-        listByIngredients.classList.toggle('hide')
-    }
+    const dropdownMenuIngredients = document.querySelector(".dropdown-menu--ingredients");
+    const listByIngredients = document.querySelector('.dropdown-menu__options--ingredients');
+    toggleDropdownList(dropdownMenuIngredients,listByIngredients);
 }
 function toggleDropDownListAppareils() {
-
-    if(dropdownMenuAppareils.classList.contains('dropdown-menu')){
-        dropdownMenuAppareils.classList.toggle('dropdown-menu__extend')
-        listByAppareils.classList.toggle('hide')
-    }
+    const dropdownMenuAppareils = document.querySelector(".dropdown-menu--appliances");
+    const listByAppareils = document.querySelector(".dropdown-menu__options--appliances");
+    toggleDropdownList(dropdownMenuAppareils,listByAppareils);
 }
 function toggleDropDownListUstensiles() {
-
-    if(dropdownMenuUstensiles.classList.contains('dropdown-menu')){
-        dropdownMenuUstensiles.classList.toggle('dropdown-menu__extend')
-        listByUstensiles.classList.toggle('hide')
-    }
+    const dropdownMenuUstensiles = document.querySelector(".dropdown-menu--utensils");
+    const listByUstensiles = document.querySelector(".dropdown-menu__options--utensils");
+    toggleDropdownList(dropdownMenuUstensiles,listByUstensiles);
 }
 
+function toggleDropdownList(menuCategory,listCategory){
+
+    if(menuCategory.classList.contains('dropdown-menu')){
+        menuCategory.classList.toggle('dropdown-menu__extend');
+        listCategory.classList.toggle('hide');
+    }
+}
 
 

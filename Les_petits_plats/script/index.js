@@ -1,8 +1,16 @@
 import {recipes} from "./recipes.js";
 
-// console.log(recipes)
+console.log(recipes)
+const [{
+     name,
+     time,
+     ingredients:[{ingredient, quantity, unit}],
+     description,
+     ustensils,
+}] = recipes;
 
 for (let recipe of recipes) {
+
 
      // Creation des elements HTML
      let cardContainer = document.querySelector('.card-container');
