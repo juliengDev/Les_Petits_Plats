@@ -23,7 +23,6 @@ function toggleDropDownListUstensiles() {
 }
 
 function toggleDropdownList(menuCategory,listCategory){
-
     if(menuCategory.classList.contains('dropdown-menu')){
         menuCategory.classList.toggle('dropdown-menu__extend');
         listCategory.classList.toggle('hide');

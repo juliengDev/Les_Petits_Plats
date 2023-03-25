@@ -1,31 +1,54 @@
 import {recipes} from "./recipes.js";
+import {getValue,createArray} from "./functions.js";
 
-console.log(recipes)
 const [{
-     name,
-     time,
-     ingredients:[{ingredient, quantity, unit}],
+     appliance,
      description,
+     id,
+     ingredients:[{ingredient, quantity, unit}],
+     name,
+     servings,
+     time,
      ustensils,
 }] = recipes;
 
-for (let recipe of recipes) {
 
+console.log(recipes[0])
+
+//Premier tri des donnees name(titre), ingredient(les ingredients) et description(la description)
+// On cree un tableau pour chacune des donnees
+const recipesNames = [];
+const ingredientsNames = [];
+const descriptionsRecipes =[];
+const ustensilsNames=[];
+
+createArray(name,recipesNames);
+createArray(ingredient,ingredientsNames);
+createArray(description,descriptionsRecipes);
+createArray(ustensils,ustensilsNames);
+
+
+
+
+
+const titles = [];
+const textDescriptions =[];
+
+for (let recipe of recipes) {
 
      // Creation des elements HTML
      let cardContainer = document.querySelector('.card-container');
-
      let cardContainerCards = document.createElement('div');
      cardContainerCards.classList.add("card-container__card", "card", "box", "box-1", "grid-item");
-
      let cardImage = document.createElement('div');
      cardImage.classList.add("card-img-top", "card-container__card-img");
-
      let cardBody = document.createElement('div');
      cardBody.classList.add("card-body", "card-container__card-body");
-
-     let descriptionIngredients = document.createElement('div')
-     descriptionIngredients.classList.add("col-6", "card-container__card-description-ingredients")
+     let descriptionIngredients = document.createElement('div');
+     descriptionIngredients.classList.add("col-6", "card-container__card-description-ingredients");
+     const dropdownMenuIngredients = document.querySelector('.dropdown-menu__options--ingredients');
+     const dropdownMenuAppareils = document.querySelector('.dropdown-menu__options--appliances');
+     const dropdownMenuUstensiles = document.querySelector('.dropdown-menu__options--utensils');
 
      let htmlRecipes = `
     <div class="card-container__card-title">
@@ -47,10 +70,6 @@ for (let recipe of recipes) {
           <p>${recipe.description}</p>
      </div>
      </div>`;
-
-     const dropdownMenuIngredients = document.querySelector('.dropdown-menu__options--ingredients');
-     const dropdownMenuAppareils = document.querySelector('.dropdown-menu__options--appliances');
-     const dropdownMenuUstensiles = document.querySelector('.dropdown-menu__options--utensils');
 
      const htmlIngredientsItem = document.createElement('li');
      htmlIngredientsItem.classList.add("dropdown-menu__option-item","dropdown-menu__option-item--ingredients")
@@ -82,9 +101,7 @@ for (let recipe of recipes) {
      dropdownMenuIngredients.appendChild(htmlIngredientsItem);
      dropdownMenuAppareils.appendChild(htmlAppareilsItem);
      dropdownMenuUstensiles.appendChild(htmlUstensilesItem);
-     // Partie Appareils
 
-     // Partie Ustensiles
 }
 
 
