@@ -11,5 +11,9 @@
   "license": "ISC",
   "dependencies": {
     "normalize.css": "^8.0.1"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^8.37.0"
   }
 }
