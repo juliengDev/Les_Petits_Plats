@@ -12,7 +12,7 @@ const [{
     ustensils,
 }] = recipes;
 
-console.log(mainSearchResult)
+
 //Variable Global
 let htmlRecipes="";
 
@@ -22,9 +22,7 @@ let htmlRecipes="";
 function defaultMainSearchDisplay(){
     //Suppression de l'ancien affichage des cards par default
     let cardContainer = document.getElementById('card-container');
-    while(cardContainer.firstChild) {
-        cardContainer.removeChild(cardContainer.firstChild)
-    }
+    clearDisplay()
     recipes.forEach( recipe => {
         //Container principal des Cards
 
@@ -67,18 +65,21 @@ function defaultMainSearchDisplay(){
         cardContainer.appendChild(cardContainerCards);
         cardContainerCards.appendChild(cardImage);
         cardContainerCards.appendChild(cardBody);
-
     })
-
 }
 
 /**
  * Fonction en charge de l’affichage par defaut de l’ensemble des differents menu dropdown de filtres avances
  */
 function defaultAdvanceSearchDisplay() {
-    let htmlIngredientsItemTab = createItemDropdown("htmlIngredientsItemTab");
-    let htmlAppliancesItemTab = createItemDropdown("htmlAppliancesItemTab");
-    let htmlUstensilsItemTab = createItemDropdown("htmlUstensilsItemTab");
+    let htmlDefaultIngredientsItemTab = createItemDropdown("htmlDefaultIngredientsItemTab");
+    let htmlDefaultAppliancesItemTab = createItemDropdown("htmlDefaultAppliancesItemTab");
+    let htmlDefaultUstensilsItemTab = createItemDropdown("htmlDefaultUstensilsItemTab");
+}
+function advancedSearchResultDisplay(){
+    let htmlAdvancedIngredientsItemTab = createItemDropdown("htmlAdvancedIngredientsItemTab");
+    let htmlAdvancedAppliancesItemTab = createItemDropdown("htmlAdvancedAppliancesItemTab");
+    let htmlAdvancedUstensilsItemTab = createItemDropdown("htmlAdvancedUstensilsItemTab");
 }
 
 /**
@@ -87,9 +88,14 @@ function defaultAdvanceSearchDisplay() {
  * @returns {*[]}
  */
 function createItemDropdown(tab){
-    const htmlIngredientsItemTab = [];
-    const htmlAppliancesItemTab =[];
-    const htmlUstensilsItemTab = [];
+    const htmlDefaultIngredientsItemTab = [];
+    const htmlDefaultAppliancesItemTab =[];
+    const htmlDefaultUstensilsItemTab = [];
+
+    const htmlAdvancedIngredientsItemTab=[];
+    const htmlAdvancedAppliancesItemTab=[];
+    const htmlAdvancedUstensilsItemTab =[];
+
     const ingredientType = "ingredient";
     const applianceType = "appliance";
     const ustensilType = "ustensil"
@@ -98,38 +104,69 @@ function createItemDropdown(tab){
     const dropdownMenuAppliances = document.querySelector('.dropdown-menu__options--appliances');
     const dropdownMenuUstensiles = document.querySelector('.dropdown-menu__options--utensils');
 
-    if(tab === "htmlIngredientsItemTab") {
+    // Cas par defaut
+    if(tab === "htmlDefaultIngredientsItemTab") {
         recipes.forEach(element => {
             element.ingredients.forEach(data => {
-                htmlIngredientsItemTab.push(data.ingredient.toLowerCase())
+                htmlDefaultIngredientsItemTab.push(data.ingredient.toLowerCase())
             })
         })
-        stringSort(htmlIngredientsItemTab);
-        let htmlIngredientsItems = removeDuplicates(htmlIngredientsItemTab);
-        // console.log(htmlIngredientsItems)
+        stringSort(htmlDefaultIngredientsItemTab);
+        let htmlIngredientsItems = removeDuplicates(htmlDefaultIngredientsItemTab);
         createHtmlElementItems(htmlIngredientsItems,dropdownMenuIngredients,ingredientType)
 
-        return htmlIngredientsItemTab
-    } else if (tab === "htmlAppliancesItemTab") {
+        return htmlIngredientsItems
+    } else if (tab === "htmlDefaultAppliancesItemTab") {
         recipes.forEach(element => {
-            htmlAppliancesItemTab.push(element.appliance.toLowerCase())
+            htmlDefaultAppliancesItemTab.push(element.appliance.toLowerCase())
         })
-        stringSort(htmlAppliancesItemTab);
-        let htmlApplianceItems = removeDuplicates(htmlAppliancesItemTab)
-        // console.log(htmlApplianceItems)
+        stringSort(htmlDefaultAppliancesItemTab);
+        let htmlApplianceItems = removeDuplicates(htmlDefaultAppliancesItemTab)
         createHtmlElementItems(htmlApplianceItems,dropdownMenuAppliances,applianceType)
 
         return htmlApplianceItems
-    } else if(tab === "htmlUstensilsItemTab"){
+    } else if(tab === "htmlDefaultUstensilsItemTab"){
         recipes.forEach(element =>{
             element.ustensils.forEach(data => {
-                htmlUstensilsItemTab.push(data.toLowerCase())
+                htmlDefaultUstensilsItemTab.push(data.toLowerCase())
             })
         })
-        stringSort(htmlUstensilsItemTab)
-        let htmlUstensilsItems = removeDuplicates(htmlUstensilsItemTab)
-        // console.log(htmlUstensilsItems)
+        stringSort(htmlDefaultUstensilsItemTab)
+        let htmlUstensilsItems = removeDuplicates(htmlDefaultUstensilsItemTab)
         createHtmlElementItems(htmlUstensilsItems,dropdownMenuUstensiles,ustensilType)
+        return htmlUstensilsItems
+    }
+    // Dans le cas d'une recherche principale
+    if(tab === "htmlAdvancedIngredientsItemTab") {
+        mainSearchResult.forEach(element => {
+            element.ingredients.forEach(data => {
+                htmlAdvancedIngredientsItemTab.push(data.ingredient.toLowerCase())
+            })
+        })
+        stringSort(htmlAdvancedIngredientsItemTab);
+        let htmlAdvancedIngredientsItems = removeDuplicates(htmlAdvancedIngredientsItemTab);
+        createHtmlElementItems(htmlAdvancedIngredientsItems,dropdownMenuIngredients,ingredientType)
+
+        return htmlAdvancedIngredientsItems
+    } else if (tab === "htmlAdvancedAppliancesItemTab") {
+        mainSearchResult.forEach(element => {
+            htmlAdvancedAppliancesItemTab.push(element.appliance.toLowerCase())
+        })
+        stringSort(htmlAdvancedAppliancesItemTab);
+        let htmlAdvancedApplianceItems = removeDuplicates(htmlAdvancedAppliancesItemTab)
+        createHtmlElementItems(htmlAdvancedApplianceItems,dropdownMenuAppliances,applianceType)
+
+        return htmlAdvancedApplianceItems
+    } else if(tab === "htmlAdvancedUstensilsItemTab"){
+        mainSearchResult.forEach(element =>{
+            element.ustensils.forEach(data => {
+                htmlAdvancedUstensilsItemTab.push(data.toLowerCase())
+            })
+        })
+        stringSort(htmlAdvancedUstensilsItemTab)
+        let htmlAdvancedUstensilsItems = removeDuplicates(htmlAdvancedUstensilsItemTab)
+        createHtmlElementItems(htmlAdvancedUstensilsItems,dropdownMenuUstensiles,ustensilType)
+        return htmlAdvancedUstensilsItems
     }
 }
 
@@ -154,16 +191,26 @@ function createHtmlElementItems(tab,menu,type){
         menu.appendChild(htmlItem);
     })
 }
+function clearDisplay(){
+    let cardContainer = document.getElementById('card-container');
+    let advancedFilterIngredients = document.querySelector(".dropdown-menu__options--ingredients");
+    let advancedFilterAppliances = document.querySelector(".dropdown-menu__options--appliances");
+    let advancedFilterUstensils= document.querySelector(".dropdown-menu__options--utensils");
+    while(cardContainer.firstChild) {
+        cardContainer.removeChild(cardContainer.firstChild)
+    }
+    advancedFilterIngredients.innerHTML="";
+    advancedFilterAppliances.innerHTML="";
+    advancedFilterUstensils.innerHTML="";
+}
 
 /**
  * Fonction en charge de l’affichage renvoyer de l’ensemble des cards correspondant a la recherche principale
  */
 function mainSearchDisplay(){
-    //Suppression de l'ancien affichage des cards par default
     let cardContainer = document.getElementById('card-container')
-    while(cardContainer.firstChild) {
-        cardContainer.removeChild(cardContainer.firstChild)
-    }
+    //Suppression de l'ancien affichage des cards par default
+    clearDisplay();
 
     mainSearchResult.forEach( recipe => {
 
@@ -218,4 +265,6 @@ export function initCards(){
     defaultAdvanceSearchDisplay();
 }
 
-export {defaultMainSearchDisplay,mainSearchDisplay};
+export {defaultMainSearchDisplay,defaultAdvanceSearchDisplay}
+export {mainSearchDisplay,clearDisplay};
+export {advancedSearchResultDisplay}

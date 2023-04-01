@@ -1,6 +1,7 @@
 import {recipes} from "../recipes.js";
 import {setArrayToLocalStorage,getArrayFromLocalStorage} from "./createArray.js";
-import {defaultMainSearchDisplay,mainSearchDisplay} from "./cards.js";
+import {defaultMainSearchDisplay, defaultAdvanceSearchDisplay, initCards} from "./cards.js";
+import {mainSearchDisplay,clearDisplay,advancedSearchResultDisplay} from "./cards.js";
 
 const [{
     appliance,
@@ -15,12 +16,12 @@ const [{
 
 
 let searchResults = [];
-let mainSearchResult =[];
-
-
+let mainSearchResult = [];
+let mainFilterSearchResult = [];
 
 function mainSearch(){
     const searchInput = document.getElementById("form-control");
+
     searchInput.addEventListener('input', event => {
 
         const userInput = event.target.value.toLowerCase();
@@ -52,16 +53,18 @@ function mainSearch(){
             setArrayToLocalStorage("searchResults",searchResults);
             getCurrentMainSearch();
             mainSearchDisplay();
+            advancedSearchResultDisplay();
+            console.log(mainSearchResult)
+
         } else {
             localStorage.clear();
-            let cardContainer = document.getElementById('card-container')
-            while(cardContainer.firstChild) {
-                cardContainer.removeChild(cardContainer.firstChild)
-            }
-            defaultMainSearchDisplay();
+            clearDisplay();
+            initCards();
+            mainSearchResult=[];
         }
     })
 }
+
 function getCurrentMainSearch() {
     let currentSearchResult = getArrayFromLocalStorage("searchResults");
     if(currentSearchResult !== null){
@@ -70,40 +73,7 @@ function getCurrentMainSearch() {
             });
     }
 }
-// function sortDataByKey() {
-// let searchResultsNames = [];
-// let searchResultsIngredients = [];
-// let searchResultsDescriptions = [];
-// let searchResultUstensils = [];
-// let searchResultAppliance = [];
-//
-//     // On cree un tableau associe a chacune des donnees a traiter a partir des donnees de recherche principales
-//     searchResultsNames = searchResults.map( recipe => {
-//         return recipe.name
-//     })
-//     searchResults.forEach(data => {
-//         data.ingredients.map( recipe => {
-//             searchResultsIngredients.push(recipe.ingredient)
-//         })
-//     })
-//     searchResultsDescriptions = searchResults.map( recipe => {
-//         return recipe.description
-//     })
-//     searchResults.forEach(data => {
-//         data.ustensils.map( recipe => {
-//             searchResultUstensils.push(recipe)
-//         })
-//     })
-//     searchResultAppliance = searchResults.map( recipe => {
-//         return recipe.appliance
-//     })
-//
-//     setArrayToLocalStorage("searchResultsNames",searchResultsNames);
-//     setArrayToLocalStorage("searchResultIngredients",searchResultsIngredients);
-//     setArrayToLocalStorage("searchResultDescriptions",searchResultsDescriptions);
-//     setArrayToLocalStorage("searchResultUstensils",searchResultUstensils);
-//     setArrayToLocalStorage("searchResultAppliance",searchResultAppliance);
-// }
+
 export function initNominal(){
     mainSearch();
 
