@@ -105,8 +105,8 @@ function clearArrayData() {
     descriptionsRecipes = removeDuplicates(rawDescriptionsRecipes);
 }
 
-export function init(){
-    clearArrayData();
+function initArray(){
+
 }
 
 export {setArrayToLocalStorage,getArrayFromLocalStorage,stringSort,removeDuplicates}

@@ -1,5 +1,5 @@
 import {recipes} from "../recipes.js";
-import {getArrayFromLocalStorage,stringSort,removeDuplicates} from  "./createArray.js"
+import {stringSort,removeDuplicates} from  "./createArray.js"
 import {mainSearchResult} from  "./nominal.js"
 const [{
     appliance,
@@ -80,6 +80,12 @@ function defaultAdvanceSearchDisplay() {
     let htmlAppliancesItemTab = createItemDropdown("htmlAppliancesItemTab");
     let htmlUstensilsItemTab = createItemDropdown("htmlUstensilsItemTab");
 }
+
+/**
+ * Fonction en charge de l’affichage par défaut de l’ensemble des differents menu dropdown de filtres avances
+ * @param tab
+ * @returns {*[]}
+ */
 function createItemDropdown(tab){
     const htmlIngredientsItemTab = [];
     const htmlAppliancesItemTab =[];
@@ -127,8 +133,14 @@ function createItemDropdown(tab){
     }
 }
 
-function createHtmlElementItems(item,menu,type){
-    item.forEach(element => {
+/**
+ * Fonction en charge de la creation des elements HTML a afficher dans les filtres avances
+ * @param tab
+ * @param menu
+ * @param type
+ */
+function createHtmlElementItems(tab,menu,type){
+    tab.forEach(element => {
         let htmlItem = document.createElement('li');
 
         if(type === "ingredient") {
@@ -143,6 +155,9 @@ function createHtmlElementItems(item,menu,type){
     })
 }
 
+/**
+ * Fonction en charge de l’affichage renvoyer de l’ensemble des cards correspondant a la recherche principale
+ */
 function mainSearchDisplay(){
     //Suppression de l'ancien affichage des cards par default
     let cardContainer = document.getElementById('card-container')
@@ -198,14 +213,9 @@ function mainSearchDisplay(){
     )
 }
 
-
 export function initCards(){
     defaultMainSearchDisplay();
     defaultAdvanceSearchDisplay();
 }
 
-export {defaultMainSearchDisplay,mainSearchDisplay}
-
-// createItemDropdown("htmlIngredientsItem",recipe)
-// createItemDropdown("htmlAppareilsItem","recipe")
-// createItemDropdown("htmlUstensilesItem","recipe")
+export {defaultMainSearchDisplay,mainSearchDisplay};

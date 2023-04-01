@@ -2,9 +2,7 @@ const sortLabelIconIngredient = document.getElementById("dropdown-menu__sort-ing
 const sortLabelIconAppareils = document.getElementById("dropdown-menu__sort-appliances");
 const sortLabelIconUstensiles = document.getElementById('dropdown-menu__sort-ustensiles');
 
-sortLabelIconIngredient.addEventListener('click',toggleDropDownListIngredients);
-sortLabelIconAppareils.addEventListener('click',toggleDropDownListAppareils);
-sortLabelIconUstensiles.addEventListener('click',toggleDropDownListUstensiles);
+
 
 function toggleDropDownListIngredients() {
     const dropdownMenuIngredients = document.querySelector(".dropdown-menu--ingredients");
@@ -29,5 +27,9 @@ function toggleDropdownList(menuCategory,listCategory){
     }
 }
 
-
+export function initDropdown(){
+    sortLabelIconIngredient.addEventListener('click',toggleDropDownListIngredients);
+    sortLabelIconAppareils.addEventListener('click',toggleDropDownListAppareils);
+    sortLabelIconUstensiles.addEventListener('click',toggleDropDownListUstensiles);
+}
 
