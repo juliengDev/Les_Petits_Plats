@@ -1,6 +1,6 @@
 import {recipes} from "../recipes.js";
 import {stringSort,removeDuplicates} from  "./createArray.js"
-import {searchResults} from  "./nominal.js"
+import {recipesToDisplay} from  "./nominal.js"
 const [{
     appliance,
     description,
@@ -12,69 +12,64 @@ const [{
     ustensils,
 }] = recipes;
 
-
 //Variable Global
 let htmlRecipes="";
-
-
-function advancedSearchResultDisplay(){
+/**
+ * Fonction en charge de l'affichage par defaut des menus dropdown des filtres de recherche avances
+ */
+function TagsDisplay(){
     clearDisplayDropdownTags();
-    let htmlAdvancedIngredientsItemTab = createItemDropdown("htmlAdvancedIngredientsItemTab");
-    let htmlAdvancedAppliancesItemTab = createItemDropdown("htmlAdvancedAppliancesItemTab");
-    let htmlAdvancedUstensilsItemTab = createItemDropdown("htmlAdvancedUstensilsItemTab");
+    let htmlTagsIngredientsItemTab = createItemDropdown("htmlTagsIngredientsItemTab");
+    let htmlTagsAppliancesItemTab = createItemDropdown("htmlTagsAppliancesItemTab");
+    let htmlTagsUstensilsItemTab = createItemDropdown("htmlTagsUstensilsItemTab");
 }
 
 /**
- * Fonction en charge de l’affichage par défaut de l’ensemble des differents menu dropdown de filtres avances
+ * Fonction en charge de la creation des tags des filtres de recherche avances
  * @param tab
  * @returns {*[]}
  */
 function createItemDropdown(tab){
-
-    const htmlAdvancedIngredientsItemTab=[];
-    const htmlAdvancedAppliancesItemTab=[];
-    const htmlAdvancedUstensilsItemTab =[];
-
+    const htmlTagsIngredientsItemTab=[];
+    const htmlTagsAppliancesItemTab=[];
+    const htmlTagsUstensilsItemTab =[];
     const ingredientType = "ingredient";
     const applianceType = "appliance";
-    const ustensilType = "ustensil"
-
+    const ustensilType = "ustensil";
     const dropdownMenuIngredients = document.querySelector('.dropdown-menu__options--ingredients')
     const dropdownMenuAppliances = document.querySelector('.dropdown-menu__options--appliances');
     const dropdownMenuUstensiles = document.querySelector('.dropdown-menu__options--utensils');
 
-
-    // Dans le cas d'une recherche principale
-    if(tab === "htmlAdvancedIngredientsItemTab") {
-        searchResults.forEach(element => {
+    if(tab === "htmlTagsIngredientsItemTab") {
+        recipesToDisplay.forEach(element => {
             element.ingredients.forEach(data => {
-                htmlAdvancedIngredientsItemTab.push(data.ingredient.toLowerCase())
+                htmlTagsIngredientsItemTab.push(data.ingredient.toLowerCase())
             })
         })
-        stringSort(htmlAdvancedIngredientsItemTab);
-        let htmlAdvancedIngredientsItems = removeDuplicates(htmlAdvancedIngredientsItemTab);
-        createHtmlElementItems(htmlAdvancedIngredientsItems,dropdownMenuIngredients,ingredientType)
+        stringSort(htmlTagsIngredientsItemTab);
+        let htmlTagsIngredientsItems = removeDuplicates(htmlTagsIngredientsItemTab);
+        createHtmlTagsItems(htmlTagsIngredientsItems,dropdownMenuIngredients,ingredientType)
 
-        return htmlAdvancedIngredientsItems
-    } else if (tab === "htmlAdvancedAppliancesItemTab") {
-        searchResults.forEach(element => {
-            htmlAdvancedAppliancesItemTab.push(element.appliance.toLowerCase())
+        return htmlTagsIngredientsItems
+    } else if (tab === "htmlTagsAppliancesItemTab") {
+        recipesToDisplay.forEach(element => {
+            htmlTagsAppliancesItemTab.push(element.appliance.toLowerCase())
         })
-        stringSort(htmlAdvancedAppliancesItemTab);
-        let htmlAdvancedApplianceItems = removeDuplicates(htmlAdvancedAppliancesItemTab)
-        createHtmlElementItems(htmlAdvancedApplianceItems,dropdownMenuAppliances,applianceType)
+        stringSort(htmlTagsAppliancesItemTab);
+        let htmlTagsApplianceItems = removeDuplicates(htmlTagsAppliancesItemTab)
+        createHtmlTagsItems(htmlTagsApplianceItems,dropdownMenuAppliances,applianceType)
 
-        return htmlAdvancedApplianceItems
-    } else if(tab === "htmlAdvancedUstensilsItemTab"){
-        searchResults.forEach(element =>{
+        return htmlTagsApplianceItems
+    } else if(tab === "htmlTagsUstensilsItemTab") {
+        recipesToDisplay.forEach(element =>{
             element.ustensils.forEach(data => {
-                htmlAdvancedUstensilsItemTab.push(data.toLowerCase())
+                htmlTagsUstensilsItemTab.push(data.toLowerCase())
             })
         })
-        stringSort(htmlAdvancedUstensilsItemTab)
-        let htmlAdvancedUstensilsItems = removeDuplicates(htmlAdvancedUstensilsItemTab)
-        createHtmlElementItems(htmlAdvancedUstensilsItems,dropdownMenuUstensiles,ustensilType)
-        return htmlAdvancedUstensilsItems
+        stringSort(htmlTagsUstensilsItemTab)
+        let htmlTagsUstensilsItems = removeDuplicates(htmlTagsUstensilsItemTab)
+        createHtmlTagsItems(htmlTagsUstensilsItems,dropdownMenuUstensiles,ustensilType)
+        return htmlTagsUstensilsItems
     }
 }
 
@@ -84,7 +79,7 @@ function createItemDropdown(tab){
  * @param menu
  * @param type
  */
-function createHtmlElementItems(tab,menu,type){
+function createHtmlTagsItems(tab,menu,type){
     tab.forEach(element => {
         let htmlItem = document.createElement('li');
 
@@ -99,34 +94,40 @@ function createHtmlElementItems(tab,menu,type){
         menu.appendChild(htmlItem);
     })
 }
+
+/**
+ * Fonction en charge de nettoyer l'affichage des Cards
+ */
 function clearDisplay(){
     let cardContainer = document.getElementById('card-container');
     while(cardContainer.firstChild) {
         cardContainer.removeChild(cardContainer.firstChild)
     }
-
-}
-function clearDisplayDropdownTags(){
-    let advancedFilterIngredients = document.querySelector(".dropdown-menu__options--ingredients");
-    let advancedFilterAppliances = document.querySelector(".dropdown-menu__options--appliances");
-    let advancedFilterUstensils= document.querySelector(".dropdown-menu__options--utensils");
-    advancedFilterIngredients.innerHTML="";
-    advancedFilterAppliances.innerHTML="";
-    advancedFilterUstensils.innerHTML="";
 }
 
 /**
- * Fonction en charge de l’affichage renvoyer de l’ensemble des cards correspondant a la recherche principale
+ * Fonction en charge de nettoyer l'affichage des Tags des filtres de recherche avances
  */
-function mainSearchDisplay(){
+function clearDisplayDropdownTags(){
+    let tagsFilterIngredients = document.querySelector(".dropdown-menu__options--ingredients");
+    let tagsFilterAppliances = document.querySelector(".dropdown-menu__options--appliances");
+    let tagsFilterUstensils= document.querySelector(".dropdown-menu__options--utensils");
+    tagsFilterIngredients.innerHTML="";
+    tagsFilterAppliances.innerHTML="";
+    tagsFilterUstensils.innerHTML="";
+}
+
+/**
+ * Fonction en charge de l’affichage des Cards
+ */
+function MainDisplay(){
     let cardContainer = document.getElementById('card-container')
     //Suppression de l'ancien affichage des cards par default
     clearDisplay();
 
-    searchResults.forEach( recipe => {
+    recipesToDisplay.forEach( recipe => {
 
         //Creation des elements HTML
-
         let cardContainerCards = document.createElement('div');
         let cardImage = document.createElement('div');
         let cardBody = document.createElement('div');
@@ -171,10 +172,5 @@ function mainSearchDisplay(){
     )
 }
 
-export function initCards(){
-
-}
-
-
-export {mainSearchDisplay,clearDisplay,clearDisplayDropdownTags};
-export {advancedSearchResultDisplay}
+export {clearDisplay,clearDisplayDropdownTags};
+export {MainDisplay,TagsDisplay}
