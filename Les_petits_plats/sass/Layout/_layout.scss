@@ -53,3 +53,39 @@
     transform: translateY(-50%);
   }
 }
+
+.tags-container {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 25px;
+    & .main-index-tags{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    &__tags-for-ingredients{
+      width: auto;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      border-radius: 5px;
+      color: map-get($color,white);
+      padding: 10px;
+    }
+    &__tags-container__tag--ingredients-bg{
+      background-color: map-get($color, blue)
+    }
+    &__tags-for-appliances{
+
+    }
+    &__tags-for-ustensils{
+
+    }
+
+}

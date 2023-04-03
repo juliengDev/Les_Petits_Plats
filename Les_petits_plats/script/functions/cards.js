@@ -17,19 +17,21 @@ let htmlRecipes="";
 /**
  * Fonction en charge de l'affichage par defaut des menus dropdown des filtres de recherche avances
  */
-function TagsDisplay(){
+function tagsDisplay(){
     clearDisplayDropdownTags();
-    let htmlTagsIngredientsItemTab = createItemDropdown("htmlTagsIngredientsItemTab");
-    let htmlTagsAppliancesItemTab = createItemDropdown("htmlTagsAppliancesItemTab");
-    let htmlTagsUstensilsItemTab = createItemDropdown("htmlTagsUstensilsItemTab");
+    let htmlTagsIngredientsItemTab = createItemDropdown("htmlTagsIngredientsItemTab",recipesToDisplay);
+    let htmlTagsAppliancesItemTab = createItemDropdown("htmlTagsAppliancesItemTab",recipesToDisplay);
+    let htmlTagsUstensilsItemTab = createItemDropdown("htmlTagsUstensilsItemTab",recipesToDisplay);
 }
 
 /**
  * Fonction en charge de la creation des tags des filtres de recherche avances
+ * @param type
  * @param tab
  * @returns {*[]}
  */
-function createItemDropdown(tab){
+function createItemDropdown(type,tab){
+
     const htmlTagsIngredientsItemTab=[];
     const htmlTagsAppliancesItemTab=[];
     const htmlTagsUstensilsItemTab =[];
@@ -40,8 +42,9 @@ function createItemDropdown(tab){
     const dropdownMenuAppliances = document.querySelector('.dropdown-menu__options--appliances');
     const dropdownMenuUstensiles = document.querySelector('.dropdown-menu__options--utensils');
 
-    if(tab === "htmlTagsIngredientsItemTab") {
-        recipesToDisplay.forEach(element => {
+    if(type === "htmlTagsIngredientsItemTab") {
+
+        tab.forEach(element => {
             element.ingredients.forEach(data => {
                 htmlTagsIngredientsItemTab.push(data.ingredient.toLowerCase())
             })
@@ -51,8 +54,8 @@ function createItemDropdown(tab){
         createHtmlTagsItems(htmlTagsIngredientsItems,dropdownMenuIngredients,ingredientType)
 
         return htmlTagsIngredientsItems
-    } else if (tab === "htmlTagsAppliancesItemTab") {
-        recipesToDisplay.forEach(element => {
+    } else if (type === "htmlTagsAppliancesItemTab") {
+        tab.forEach(element => {
             htmlTagsAppliancesItemTab.push(element.appliance.toLowerCase())
         })
         stringSort(htmlTagsAppliancesItemTab);
@@ -60,8 +63,8 @@ function createItemDropdown(tab){
         createHtmlTagsItems(htmlTagsApplianceItems,dropdownMenuAppliances,applianceType)
 
         return htmlTagsApplianceItems
-    } else if(tab === "htmlTagsUstensilsItemTab") {
-        recipesToDisplay.forEach(element =>{
+    } else if(type === "htmlTagsUstensilsItemTab") {
+        tab.forEach(element =>{
             element.ustensils.forEach(data => {
                 htmlTagsUstensilsItemTab.push(data.toLowerCase())
             })
@@ -90,7 +93,7 @@ function createHtmlTagsItems(tab,menu,type){
         } else if(type ==="ustensil"){
             htmlItem.classList.add("dropdown-menu__option-item","dropdown-menu__options-item--utensils")
         }
-        htmlItem.innerText += element;
+        htmlItem.textContent = element;
         menu.appendChild(htmlItem);
     })
 }
@@ -120,7 +123,7 @@ function clearDisplayDropdownTags(){
 /**
  * Fonction en charge de l’affichage des Cards
  */
-function MainDisplay(){
+function recipesDisplay(){
     let cardContainer = document.getElementById('card-container')
     //Suppression de l'ancien affichage des cards par default
     clearDisplay();
@@ -173,4 +176,4 @@ function MainDisplay(){
 }
 
 export {clearDisplay,clearDisplayDropdownTags};
-export {MainDisplay,TagsDisplay}
+export {recipesDisplay,tagsDisplay,createItemDropdown,createHtmlTagsItems}
