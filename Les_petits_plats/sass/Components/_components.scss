@@ -15,6 +15,7 @@
   height: 70px;
   width: 170px;
   margin-right: 20px;
+  transition: width 450ms ease-out;
 
 
     &--ingredients {
@@ -23,7 +24,7 @@
     &--appliances {
       background-color: map-get($color, green);
     }
-    &--utensils {
+    &--ustensils {
       background-color: map-get($color,orange);
     };
     &__sort-input{
@@ -67,7 +68,7 @@
         &--appliances {
           background-color: map-get($color,green);
         }
-        &--utensils {
+        &--ustensils {
           background-color: map-get($color,orange);
         }
     }

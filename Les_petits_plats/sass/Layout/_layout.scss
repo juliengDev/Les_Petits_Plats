@@ -80,6 +80,12 @@
         &--ingredients-bg{
           background-color: map-get($color, blue)
         }
+        &--appliances-bg {
+          background-color: map-get($color, green);
+        }
+        &--ustensils-bg {
+          background-color: map-get($color,orange);
+        }
         &-close-button {
           display: flex;
           flex-direction: row;

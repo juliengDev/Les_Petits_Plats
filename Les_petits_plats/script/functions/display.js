@@ -40,7 +40,7 @@ function createItemDropdown(type,tab){
     const ustensilType = "ustensil";
     const dropdownMenuIngredients = document.querySelector('.dropdown-menu__options--ingredients')
     const dropdownMenuAppliances = document.querySelector('.dropdown-menu__options--appliances');
-    const dropdownMenuUstensiles = document.querySelector('.dropdown-menu__options--utensils');
+    const dropdownMenuUstensiles = document.querySelector('.dropdown-menu__options--ustensils');
 
     if(type === "htmlTagsIngredientsItemTab") {
 
@@ -91,7 +91,7 @@ function createHtmlTagsItems(tab,menu,type){
         }else if(type === "appliance") {
             htmlItem.classList.add("dropdown-menu__option-item","dropdown-menu__options-item--appliances");
         } else if(type ==="ustensil"){
-            htmlItem.classList.add("dropdown-menu__option-item","dropdown-menu__options-item--utensils")
+            htmlItem.classList.add("dropdown-menu__option-item","dropdown-menu__options-item--ustensils");
         }
         htmlItem.textContent = element;
         menu.appendChild(htmlItem);
@@ -114,7 +114,7 @@ function clearDisplay(){
 function clearDisplayDropdownTags(){
     let tagsFilterIngredients = document.querySelector(".dropdown-menu__options--ingredients");
     let tagsFilterAppliances = document.querySelector(".dropdown-menu__options--appliances");
-    let tagsFilterUstensils= document.querySelector(".dropdown-menu__options--utensils");
+    let tagsFilterUstensils= document.querySelector(".dropdown-menu__options--ustensils");
     tagsFilterIngredients.innerHTML="";
     tagsFilterAppliances.innerHTML="";
     tagsFilterUstensils.innerHTML="";
@@ -136,12 +136,14 @@ function recipesDisplay(){
         let cardBody = document.createElement('div');
         let descriptionIngredients = document.createElement('div');
 
+
         //Modification des elements HTML
         cardContainer.classList.add("card-container", "grid");
         cardContainerCards.classList.add("card-container__card", "card", "box", "box-1", "grid-item");
         cardImage.classList.add("card-img-top", "card-container__card-img");
         cardBody.classList.add("card-body", "card-container__card-body");
         descriptionIngredients.classList.add("col-6", "card-container__card-description-ingredients");
+
 
         htmlRecipes = `
         <div class="card-container__card-title">
