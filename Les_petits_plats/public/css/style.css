@@ -1,10 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap");
-* {
+*,
+::before,
+::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
   list-style-type: none;
+}
+
+p {
+  display: block;
+  margin: 0;
 }
 
 textarea, input {
@@ -19,7 +26,7 @@ body {
 .sort-inputs-container {
   max-width: 1300px;
   display: flex;
-  margin: 75px 0 20px 0;
+  margin: 20px 0;
   padding: 0;
 }
 
@@ -92,6 +99,7 @@ body {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  cursor: pointer;
 }
 .dropdown-menu__option-item--ingredients {
   background-color: #3282F7;
@@ -246,7 +254,7 @@ body {
   flex-wrap: wrap;
   gap: 20px;
 }
-.tags-container__tags-for-ingredients {
+.tags-container__tag {
   width: auto;
   display: flex;
   flex-direction: row;
@@ -257,8 +265,19 @@ body {
   color: #FFF;
   padding: 10px;
 }
-.tags-container__tags-container__tag--ingredients-bg {
+.tags-container__tag--ingredients-bg {
   background-color: #3282F7;
+}
+.tags-container__tag-close-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+  gap: 0;
+  aspect-ratio: 1/1;
+  height: 20px;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
 }
 
 /*# sourceMappingURL=style.css.map */

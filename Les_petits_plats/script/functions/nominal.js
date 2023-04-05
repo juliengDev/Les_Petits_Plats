@@ -1,6 +1,7 @@
 import {recipes} from "../recipes.js";
-import {recipesDisplay,tagsDisplay,createHtmlTagsItems} from "./cards.js";
+import {recipesDisplay,tagsDisplay,createHtmlTagsItems} from "./display.js";
 import {stringSort,removeDuplicates} from  "./createArray.js"
+import {setupEventCreateTags,setupEventDeleteTags} from "./tags.js"
 
 
 const [{
@@ -17,9 +18,7 @@ const [{
 
 let recipesToDisplay = [];
 let recipesToDisplayTags= [];
-let tagsIngredientToDisplay=[];
-let tagsUstensilToDisplay = [];
-let tagsApplianceToDisplay= [];
+
 
 function search(userInput){
 
@@ -62,6 +61,7 @@ function setupEventMainSearch(){
             recipesDisplay();
             tagsDisplay();
             setupEventIngredientsTagsSearch();
+            setupEventCreateTags()
 
         } else {
             search("");
@@ -71,18 +71,7 @@ function setupEventMainSearch(){
     })
 }
 
-function createTag(){
 
-}
-function setupEventCreateTags(){
- const listItems = document.querySelectorAll(".dropdown-menu__option-item")
-
-    listItems.forEach(item=>{
-        item.addEventListener('click',event => {
-            console.log(event.target.textContent)
-        })
-    })
-}
 
 function setupEventIngredientsTagsSearch(){
 
@@ -175,7 +164,7 @@ search("");
 recipesDisplay();
 tagsDisplay();
 setupEventIngredientsTagsSearch();
-setupEventCreateTags();
+setupEventCreateTags()
 }
 
 export {recipesToDisplay}

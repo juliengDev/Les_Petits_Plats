@@ -3,7 +3,7 @@
 .sort-inputs-container {
   max-width: 1300px;
   display: flex;
-  margin: 75px 0 20px 0;
+  margin: 20px 0;
   padding: 0;
 }
 //Dropdown Button
@@ -78,6 +78,7 @@
       display: flex;
       justify-content: flex-start;
       align-items: center;
+      cursor: pointer;
       &--ingredients {
         background-color: map-get($color,blue);
       }

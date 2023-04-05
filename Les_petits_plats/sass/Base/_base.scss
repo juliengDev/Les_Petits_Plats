@@ -4,11 +4,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
 
-* {
+*,
+::before,
+::after{
   box-sizing: border-box;
   margin:0;
   padding:0;
   list-style-type: none;
+}
+p {
+  display: block;
+  margin:0;
 }
 textarea,input {
   appearance: none;
