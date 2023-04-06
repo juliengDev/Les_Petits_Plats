@@ -1,27 +1,78 @@
-import {recipes} from "../recipes.js";
-import {stringSort,removeDuplicates} from  "./createArray.js"
+import {removeDuplicates} from "./array.js"
 import {recipesToDisplay} from  "./nominal.js"
-const [{
-    appliance,
-    description,
-    id,
-    ingredients:[{ingredient, quantity, unit}],
-    name,
-    servings,
-    time,
-    ustensils,
-}] = recipes;
+
 
 //Variable Global
 let htmlRecipes="";
+
+/**
+ * Fonction en charge de l’affichage des Cards
+ */
+function recipesDisplay(){
+    let cardContainer = document.getElementById('card-container')
+    //Suppression de l'ancien affichage des cards par default
+    clearDisplay();
+
+
+
+    recipesToDisplay.forEach( recipe => {
+
+            //Creation des elements HTML
+            let cardContainerCards = document.createElement('div');
+            let cardImage = document.createElement('div');
+            let cardBody = document.createElement('div');
+            let descriptionIngredients = document.createElement('div');
+
+            //Modification des elements HTML
+            cardContainer.classList.add("card-container", "grid");
+            cardContainerCards.classList.add("card-container__card", "card", "box", "box-1", "grid-item");
+            cardImage.classList.add("card-img-top", "card-container__card-img");
+            cardBody.classList.add("card-body", "card-container__card-body");
+            descriptionIngredients.classList.add("col-6", "card-container__card-description-ingredients");
+
+
+            htmlRecipes = `
+        <div class="card-container__card-title">
+         <h2 id="recipeName">${recipe.name}</h2>
+         <div class="card-container__card-title-timer">
+             <i class="bi bi-clock font-weight-bold"></i>
+             <p id="recipeTime">${recipe.time} min</p>
+         </div>
+        </div>
+        <div class="card-container__card-description">
+        <div class="col-6 card-container__card-description-ingredients">`;
+
+            recipe.ingredients.forEach(ingredient => {
+                htmlRecipes += `<p><span id ="ingredientName" class="bold">${ingredient.ingredient} :</span> <span id="ingredientQuantity">${ingredient.quantity ?? ""}</span> <span id="ingredientUnit">${ingredient.unit ?? ""}</span></p>`
+            })
+
+            htmlRecipes +=`
+         </div>
+         <div class="col-6 card-container__card-description-texte">
+              <p id="descriptionRecipe">${recipe.description}</p>
+         </div>
+         </div>`;
+
+            //Ajout des elements HTML
+            cardBody.innerHTML= htmlRecipes;
+            cardContainer.appendChild(cardContainerCards);
+            cardContainerCards.appendChild(cardImage);
+            cardContainerCards.appendChild(cardBody);
+
+        }
+    )
+}
 /**
  * Fonction en charge de l'affichage par defaut des menus dropdown des filtres de recherche avances
  */
 function tagsDisplay(){
     clearDisplayDropdownTags();
-    let htmlTagsIngredientsItemTab = createItemDropdown("htmlTagsIngredientsItemTab",recipesToDisplay);
-    let htmlTagsAppliancesItemTab = createItemDropdown("htmlTagsAppliancesItemTab",recipesToDisplay);
-    let htmlTagsUstensilsItemTab = createItemDropdown("htmlTagsUstensilsItemTab",recipesToDisplay);
+    const ingredientsItemTab = "htmlTagsIngredientsItemTab";
+    const appliancesItemTab = "htmlTagsAppliancesItemTab";
+    const ustensilsItemTab = "htmlTagsUstensilsItemTab";
+    createItemDropdown(ingredientsItemTab,recipesToDisplay);
+    createItemDropdown(appliancesItemTab,recipesToDisplay);
+    createItemDropdown(ustensilsItemTab,recipesToDisplay);
 }
 
 /**
@@ -49,7 +100,7 @@ function createItemDropdown(type,tab){
                 htmlTagsIngredientsItemTab.push(data.ingredient.toLowerCase())
             })
         })
-        stringSort(htmlTagsIngredientsItemTab);
+        htmlTagsIngredientsItemTab.sort();
         let htmlTagsIngredientsItems = removeDuplicates(htmlTagsIngredientsItemTab);
         createHtmlTagsItems(htmlTagsIngredientsItems,dropdownMenuIngredients,ingredientType)
 
@@ -58,7 +109,7 @@ function createItemDropdown(type,tab){
         tab.forEach(element => {
             htmlTagsAppliancesItemTab.push(element.appliance.toLowerCase())
         })
-        stringSort(htmlTagsAppliancesItemTab);
+        htmlTagsAppliancesItemTab.sort();
         let htmlTagsApplianceItems = removeDuplicates(htmlTagsAppliancesItemTab)
         createHtmlTagsItems(htmlTagsApplianceItems,dropdownMenuAppliances,applianceType)
 
@@ -69,7 +120,7 @@ function createItemDropdown(type,tab){
                 htmlTagsUstensilsItemTab.push(data.toLowerCase())
             })
         })
-        stringSort(htmlTagsUstensilsItemTab)
+        htmlTagsUstensilsItemTab.sort()
         let htmlTagsUstensilsItems = removeDuplicates(htmlTagsUstensilsItemTab)
         createHtmlTagsItems(htmlTagsUstensilsItems,dropdownMenuUstensiles,ustensilType)
         return htmlTagsUstensilsItems
@@ -120,62 +171,7 @@ function clearDisplayDropdownTags(){
     tagsFilterUstensils.innerHTML="";
 }
 
-/**
- * Fonction en charge de l’affichage des Cards
- */
-function recipesDisplay(){
-    let cardContainer = document.getElementById('card-container')
-    //Suppression de l'ancien affichage des cards par default
-    clearDisplay();
 
-    recipesToDisplay.forEach( recipe => {
-
-        //Creation des elements HTML
-        let cardContainerCards = document.createElement('div');
-        let cardImage = document.createElement('div');
-        let cardBody = document.createElement('div');
-        let descriptionIngredients = document.createElement('div');
-
-
-        //Modification des elements HTML
-        cardContainer.classList.add("card-container", "grid");
-        cardContainerCards.classList.add("card-container__card", "card", "box", "box-1", "grid-item");
-        cardImage.classList.add("card-img-top", "card-container__card-img");
-        cardBody.classList.add("card-body", "card-container__card-body");
-        descriptionIngredients.classList.add("col-6", "card-container__card-description-ingredients");
-
-
-        htmlRecipes = `
-        <div class="card-container__card-title">
-         <h2 id="recipeName">${recipe.name}</h2>
-         <div class="card-container__card-title-timer">
-             <i class="bi bi-clock font-weight-bold"></i>
-             <p id="recipeTime">${recipe.time} min</p>
-         </div>
-        </div>
-        <div class="card-container__card-description">
-        <div class="col-6 card-container__card-description-ingredients">`;
-
-        recipe.ingredients.forEach(ingredient => {
-            htmlRecipes += `<p><span id ="ingredientName" class="bold">${ingredient.ingredient} :</span> <span id="ingredientQuantity">${ingredient.quantity ?? ""}</span> <span id="ingredientUnit">${ingredient.unit ?? ""}</span></p>`
-        })
-
-        htmlRecipes +=`
-         </div>
-         <div class="col-6 card-container__card-description-texte">
-              <p id="descriptionRecipe">${recipe.description}</p>
-         </div>
-         </div>`;
-
-        //Ajout des elements HTML
-        cardBody.innerHTML= htmlRecipes;
-        cardContainer.appendChild(cardContainerCards);
-        cardContainerCards.appendChild(cardImage);
-        cardContainerCards.appendChild(cardBody);
-
-        }
-    )
-}
 
 export {clearDisplay,clearDisplayDropdownTags};
 export {recipesDisplay,tagsDisplay,createItemDropdown,createHtmlTagsItems}

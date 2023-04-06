@@ -1,5 +1,49 @@
-let tag="";
 
+
+let ingredientsTab =[];
+
+
+
+
+function setupEventCreateTags(type){
+
+    if(type==="Ingredients") {
+        const listItems = document.querySelectorAll(".dropdown-menu__option-item--ingredients")
+
+        listItems.forEach(item=>{
+            item.addEventListener('click',event => {
+                let tag = event.target.textContent;
+
+                ingredientsTab.push(tag)
+                console.log(ingredientsTab)
+                createTag(tag,"ingredient")
+                setupEventDeleteTags()
+
+            })
+        })
+    }else if(type==="Appliances"){
+        const listItems = document.querySelectorAll(".dropdown-menu__options-item--appliances")
+
+        listItems.forEach(item=>{
+            item.addEventListener('click',event => {
+                let tag = event.target.textContent;
+                createTag(tag,"appliance")
+                setupEventDeleteTags()
+            })
+        })
+    }else if(type==="Ustensils"){
+        const listItems = document.querySelectorAll(".dropdown-menu__options-item--ustensils")
+
+        listItems.forEach(item=>{
+            item.addEventListener('click',event => {
+                let tag = event.target.textContent;
+                createTag(tag,"ustensils")
+                setupEventDeleteTags()
+            })
+        })
+    }
+
+}
 function createTag(tag,type){
 
     if(type==="ingredient"){
@@ -20,7 +64,7 @@ function createTag(tag,type){
                 </div>`;
             container.appendChild(tagItem);
         })
-    }else if(type==="appliance"){
+    } else if (type === "appliance") {
         const tagsContainer = document.querySelectorAll('.tags-container__tags-for-appliances');
 
         tagsContainer.forEach( container => {
@@ -40,7 +84,7 @@ function createTag(tag,type){
             container.appendChild(tagItem);
         })
 
-    }else if( type==="ustensils") {
+    } else if (type === "ustensils") {
         const tagsContainer = document.querySelectorAll('.tags-container__tags-for-ustensils');
 
         tagsContainer.forEach( container => {
@@ -61,62 +105,16 @@ function createTag(tag,type){
         })
     }
 }
-function setupEventCreateTags(type){
-
-    if(type==="Ingredients") {
-        const listItems = document.querySelectorAll(".dropdown-menu__option-item--ingredients")
-
-        listItems.forEach(item=>{
-            item.addEventListener('click',event => {
-                tag = event.target.textContent;
-                createTag(tag,"ingredient")
-                setupEventDeleteTags()
-            })
-        })
-    }else if(type==="Appliances"){
-        const listItems = document.querySelectorAll(".dropdown-menu__options-item--appliances")
-
-        listItems.forEach(item=>{
-            item.addEventListener('click',event => {
-                tag = event.target.textContent;
-                createTag(tag,"appliance")
-                setupEventDeleteTags()
-            })
-        })
-    }else if(type==="Ustensils"){
-        const listItems = document.querySelectorAll(".dropdown-menu__options-item--ustensils")
-
-        listItems.forEach(item=>{
-            item.addEventListener('click',event => {
-                tag = event.target.textContent;
-                createTag(tag,"ustensils")
-                setupEventDeleteTags()
-            })
-        })
-    }
-
-}
-function deleteTags(tag){
-    const tagsContainer = document.querySelector('.tags-container__tag');
-    tagsContainer.remove()
-
-}
 function setupEventDeleteTags(){
 
-    const buttonsCloseTag = document.querySelectorAll(".tags-container__tag-close-button")
-
-
+    const buttonsCloseTag = document.querySelectorAll(".tags-container__tag-close-button");
     buttonsCloseTag.forEach(button => {
-        button.addEventListener('click', event => {
-            // Sélectionnez la div parente de l'élément de bouton de fermeture qui a été cliqué
+        button.addEventListener('click', () => {
             const tagDiv = button.closest(' .tags-container-parent ');
-            // console.log(tagDiv)
-            // console.log(event.target)
-            // console.log(event.currentTarget)
-            // Supprimez la div parente de l'élément de bouton de fermeture qui a été cliqué
             tagDiv.remove();
         });
     });
 }
 
 export {setupEventCreateTags,setupEventDeleteTags}
+export {ingredientsTab}

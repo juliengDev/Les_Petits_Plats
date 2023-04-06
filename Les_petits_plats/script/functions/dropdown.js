@@ -36,7 +36,6 @@ function toggleDropdownList(menuCategory,listCategory,input,type){
                 input.value="Ustensiles"
             }
         }
-
     }
 }
 
@@ -44,6 +43,5 @@ export function initDropdown(){
     sortLabelIconIngredient.addEventListener('click',toggleDropDownListIngredients);
     sortLabelIconAppareils.addEventListener('click',toggleDropDownListAppareils);
     sortLabelIconUstensiles.addEventListener('click',toggleDropDownListUstensiles);
-
 }
 
