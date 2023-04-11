@@ -16,28 +16,27 @@ import {setupEventCreateTags,ingredientsTab} from "./tags.js"
 
 
 let recipesToDisplay = [];
+
+
 function setupEventMainSearch(){
     const searchInput = document.getElementById("form-control");
-   
+
     searchInput.addEventListener('input', event => {
 
         const userInput = event.target.value.toLowerCase();
         if (userInput.length >= 3) {
-            search(userInput);
-            recipesDisplay();
-            tagsDisplay();
-            setupEventFilterTagsSearch("searchInputIngredients");
-            setupEventFilterTagsSearch("searchInputAppliances");
-            setupEventFilterTagsSearch("searchInputUstensils");
+
+            mainSearchDisplay(userInput);
+            setupEventFilterTags();
+
 
         } else {
-            search("");
-            recipesDisplay();
-            tagsDisplay();
+            defaultDisplay();
         }
     })
 }
-function search(userInput){
+
+export function search(userInput){
 
     if(userInput === "") {
         recipesToDisplay = recipes;
@@ -64,34 +63,39 @@ function search(userInput){
                 found = true;
             }
 
-            //recipe.ingredients = [ 'banane', 'café', 'paté' ]
+            //recipe.ingredients = [ 'banane', 'sucre', 'chocolat' ]
 
-            //ingredientTags v1 = [ 'paté', 'banane']
+            //ingredientTab v1 = [ 'chocolat', 'banane'] Correspond aux tags selectionnes
             // resultat recherche v1 : true
 
-            //ingredientTags v2 = [ 'café', 'banane', 'sel', 'oeuf', 'patate' , 'paté' ]
+            //ingredientTab v2 = [ 'café', 'banane', 'sel', 'oeuf', 'patate' , 'paté' ] Correspond aux tags selectionnes
             // resultat recherche v2 : false
-
 
             //boolean pour indiquer que la recipe en cours
             //contient l'ensemble des tags d'ingredients dans sa liste d'ingredient
             let foundIngredientTags;
 
+            console.log(recipesToDisplay)
             if(ingredientsTab.length === 0){
                  foundIngredientTags = true;
-            }else {
+                console.log("ingredient Tab tag est vide")
+                console.log(recipesToDisplay)
+                recipe.ingredients.forEach(item => {
+                    console.log(item)
+                })
+            } else {
+                console.log("ingredient Tab tag n'est pas vide")
                 foundIngredientTags = false;
                 ingredientsTab.forEach( ingredientTag => {
-
-                    recipe.ingredients.forEach( item =>{
-                        console.log(ingredientTag)
-                        console.log(item.ingredient)
-                        if(ingredientTag === item.ingredient) {
-
+                    recipe.ingredients.forEach( item => {
+                        console.log("ingredientTag : " + ingredientTag)
+                        console.log("item.ingredient : " + item.ingredient)
+                        if(ingredientTag.toLowerCase() === item.ingredient.toLowerCase()) {
+                            console.log("ingredientTag === item.ingredient")
                             foundIngredientTags = true
                             return true
-
                         }else{
+                            console.log("not found")
                             foundIngredientTags = false
                         }
                     })
@@ -101,21 +105,55 @@ function search(userInput){
                 })
             }
 
-
-
-            // Retourne false si la recette ne correspond pas aux critères de recherche
-            // console.log("return false :"+recipe.name)
-            return found && foundIngredientTags ;
+            console.log("return false :"+recipe.name)
+        return found && foundIngredientTags
         })
     }
+}
 
+// export function searchIngredientsTag(tab){
+//     console.log(tab)
+//     recipesToDisplay = recipes.filter( recipe => {
+//         let foundIngredientTags = false;
+//         // console.log(recipesToDisplay)
+//         tab.forEach( ingredientTag => {
+//             recipe.ingredients.forEach( item => {
+//                 if(ingredientTag.toLowerCase() === item.ingredient.toLowerCase()) {
+//                     foundIngredientTags = true
+//                     return true
+//                 }else{
+//                     foundIngredientTags = false
+//                 }
+//             })
+//             if(!foundIngredientTags){
+//                 return false
+//             }
+//         })
+//
+//     return foundIngredientTags
+//     })
+//     console.log(recipesToDisplay)
+//     return recipesToDisplay
+// }
 
+function setupEventFilterTags(){
+    const searchInputIngredients = "searchInputIngredients";
+    const searchInputAppliances = "searchInputAppliances";
+    const searchInputUstensils = "searchInputUstensils";
+
+    setupEventFilterTagsSearch(searchInputIngredients);
+    setupEventFilterTagsSearch(searchInputAppliances);
+    setupEventFilterTagsSearch(searchInputUstensils);
 }
 function setupEventFilterTagsSearch(filter){
+
     if(filter === "searchInputIngredients") {
+
+        const ingredientsType = "Ingredients"
         const searchInputIngredients = document.getElementById("sort-by-ingredients");
+
         searchInputIngredients.addEventListener('input', event => {
-            let ingredientsSearchResult =[]
+            let ingredientsSearchResult =[];
             const ingredientsHTMLUL = document.querySelector('.dropdown-menu__options--ingredients');
             const userInput = event.target.value.toLowerCase();
 
@@ -123,21 +161,27 @@ function setupEventFilterTagsSearch(filter){
                 recipe.ingredients.forEach(item =>{
                     // console.log(item.ingredient)
                     if(item.ingredient.toLowerCase().includes(userInput)) {
+
                         ingredientsSearchResult.push(item.ingredient)
                     }
                 })
             })
+
             ingredientsSearchResult = removeDuplicates(ingredientsSearchResult);
             ingredientsSearchResult = ingredientsSearchResult.sort();
-            // console.log(ingredientsSearchResult)
+            console.log(ingredientsSearchResult)
 
             //Reset de ingredientsList
             ingredientsHTMLUL.innerHTML="";
             createHtmlTagsItems(ingredientsSearchResult,ingredientsHTMLUL,"ingredient");
-            setupEventCreateTags("Ingredients");
+            setupEventCreateTags(ingredientsType);
+
+
         })
     }else if(filter==="searchInputAppliances") {
+        const appliancesType = "Appliances";
         const searchInputAppliances = document.getElementById("sort-by-appareils");
+
         searchInputAppliances.addEventListener('input', event => {
             let appliancesSearchResult = [];
             const appliancesHTMLUL = document.querySelector('.dropdown-menu__options--appliances');
@@ -151,14 +195,18 @@ function setupEventFilterTagsSearch(filter){
             })
             appliancesSearchResult = removeDuplicates(appliancesSearchResult);
             appliancesSearchResult = appliancesSearchResult.sort();
+            console.log(appliancesSearchResult)
 
             appliancesHTMLUL.innerHTML="";
             createHtmlTagsItems(appliancesSearchResult,appliancesHTMLUL,"appliance");
-            setupEventCreateTags("Appliances");
+            setupEventCreateTags(appliancesType);
+
         })
 
     }else if(filter==="searchInputUstensils") {
+        const ustensilsType = "Ustensils"
         const searchInputUstensils = document.getElementById("sort-by-ustensils");
+
         searchInputUstensils.addEventListener('input', event => {
             let ustensilsSearchResult=[];
             const ustensilsHTMLUL = document.querySelector('.dropdown-menu__options--ustensils')
@@ -176,16 +224,23 @@ function setupEventFilterTagsSearch(filter){
             ustensilsSearchResult =removeDuplicates(ustensilsSearchResult);
             ustensilsSearchResult = ustensilsSearchResult.sort();
             createHtmlTagsItems(ustensilsSearchResult,ustensilsHTMLUL,"ustensil");
-            setupEventCreateTags("Ustensils");
+            setupEventCreateTags(ustensilsType);
         })
     }
 }
-
-export function initNominal(){
-setupEventMainSearch();
+function defaultDisplay(){
 search("");
 recipesDisplay();
 tagsDisplay();
+}
+export function mainSearchDisplay(input){
+search(input);
+recipesDisplay();
+tagsDisplay();
+}
+export function initNominal(){
+setupEventMainSearch();
+defaultDisplay();
 }
 
 export {recipesToDisplay}

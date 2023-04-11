@@ -1,5 +1,6 @@
 import {removeDuplicates} from "./array.js"
 import {recipesToDisplay} from  "./nominal.js"
+import {setupEventCreateTags} from "./tags.js";
 
 
 //Variable Global
@@ -9,11 +10,10 @@ let htmlRecipes="";
  * Fonction en charge de l’affichage des Cards
  */
 function recipesDisplay(){
+
     let cardContainer = document.getElementById('card-container')
     //Suppression de l'ancien affichage des cards par default
     clearDisplay();
-
-
 
     recipesToDisplay.forEach( recipe => {
 
@@ -67,9 +67,12 @@ function recipesDisplay(){
  */
 function tagsDisplay(){
     clearDisplayDropdownTags();
+
     const ingredientsItemTab = "htmlTagsIngredientsItemTab";
     const appliancesItemTab = "htmlTagsAppliancesItemTab";
     const ustensilsItemTab = "htmlTagsUstensilsItemTab";
+
+
     createItemDropdown(ingredientsItemTab,recipesToDisplay);
     createItemDropdown(appliancesItemTab,recipesToDisplay);
     createItemDropdown(ustensilsItemTab,recipesToDisplay);
@@ -103,6 +106,8 @@ function createItemDropdown(type,tab){
         htmlTagsIngredientsItemTab.sort();
         let htmlTagsIngredientsItems = removeDuplicates(htmlTagsIngredientsItemTab);
         createHtmlTagsItems(htmlTagsIngredientsItems,dropdownMenuIngredients,ingredientType)
+        setupEventCreateTags("Ingredients");
+
 
         return htmlTagsIngredientsItems
     } else if (type === "htmlTagsAppliancesItemTab") {
@@ -110,8 +115,10 @@ function createItemDropdown(type,tab){
             htmlTagsAppliancesItemTab.push(element.appliance.toLowerCase())
         })
         htmlTagsAppliancesItemTab.sort();
-        let htmlTagsApplianceItems = removeDuplicates(htmlTagsAppliancesItemTab)
-        createHtmlTagsItems(htmlTagsApplianceItems,dropdownMenuAppliances,applianceType)
+        let htmlTagsApplianceItems = removeDuplicates(htmlTagsAppliancesItemTab);
+        createHtmlTagsItems(htmlTagsApplianceItems,dropdownMenuAppliances,applianceType);
+        setupEventCreateTags("Appliances");
+
 
         return htmlTagsApplianceItems
     } else if(type === "htmlTagsUstensilsItemTab") {
@@ -121,8 +128,9 @@ function createItemDropdown(type,tab){
             })
         })
         htmlTagsUstensilsItemTab.sort()
-        let htmlTagsUstensilsItems = removeDuplicates(htmlTagsUstensilsItemTab)
-        createHtmlTagsItems(htmlTagsUstensilsItems,dropdownMenuUstensiles,ustensilType)
+        let htmlTagsUstensilsItems = removeDuplicates(htmlTagsUstensilsItemTab);
+        createHtmlTagsItems(htmlTagsUstensilsItems,dropdownMenuUstensiles,ustensilType);
+        setupEventCreateTags("Ustensils");
         return htmlTagsUstensilsItems
     }
 }

@@ -1,23 +1,26 @@
 
+import {recipesDisplay, tagsDisplay} from "./display.js"
+import {search} from "./nominal.js"
 
 let ingredientsTab =[];
-
-
-
 
 function setupEventCreateTags(type){
 
     if(type==="Ingredients") {
         const listItems = document.querySelectorAll(".dropdown-menu__option-item--ingredients")
+        const searchInput = document.getElementById("form-control");
 
         listItems.forEach(item=>{
             item.addEventListener('click',event => {
                 let tag = event.target.textContent;
-
                 ingredientsTab.push(tag)
                 console.log(ingredientsTab)
                 createTag(tag,"ingredient")
-                setupEventDeleteTags()
+                console.log(searchInput.value)
+                search(searchInput.value);
+                recipesDisplay();
+                tagsDisplay();
+                setupEventDeleteTags('ingredient')
 
             })
         })
@@ -105,15 +108,52 @@ function createTag(tag,type){
         })
     }
 }
-function setupEventDeleteTags(){
+
+function setupEventDeleteTags(type){
 
     const buttonsCloseTag = document.querySelectorAll(".tags-container__tag-close-button");
     buttonsCloseTag.forEach(button => {
-        button.addEventListener('click', () => {
+        button.addEventListener('click', (event) => {
             const tagDiv = button.closest(' .tags-container-parent ');
+            const tagText = event.currentTarget.previousElementSibling.textContent
             tagDiv.remove();
+
+
+            if(type==="ingredient"){
+                 ingredientsTab.forEach(ingredient => {
+                    if(ingredient === tagText) {
+                        // console.log(ingredientsTab.indexOf(ingredient))
+                        ingredientsTab.splice(ingredientsTab.indexOf(ingredient),1)
+                    }
+                })
+                // Yipikahiye Mother Fucker !!!!!!!!!!
+
+
+
+
+
+
+                //  ingredientsTab = ingredientsTab.filter( (value, index, arr) => {
+                //     // si la valeur à l'index actuelle vaut la valeur qu'on cherche (tagText)
+                //     if (value === tagText) {
+                //         console.log("value : "+value)
+                //         console.log("index : "+index)
+                //         console.log("array : "+arr)
+                //         // supprime la valeur dans le tableau
+                //         arr.splice(index, 1);
+                //         return true;
+                //     }
+                //     return false;
+                // })
+                console.log(ingredientsTab)
+            }
+
+
+
+
         });
     });
+
 }
 
 export {setupEventCreateTags,setupEventDeleteTags}
