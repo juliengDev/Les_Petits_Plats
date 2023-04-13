@@ -2,9 +2,19 @@
 
 .sort-inputs-container {
   max-width: 1300px;
-  display: flex;
+  //display: flex;
+  display: grid;
+  grid-template-rows: repeat(auto-fill,1fr);
+  grid-template-columns: repeat(3,1fr);
+  gap: 50px;
   margin: 20px 0;
   padding: 0;
+  @include my-breakpoint {
+    grid-template-columns: repeat(1,1fr);
+    margin-bottom: 10px;
+    gap: 10px;
+  };
+
 }
 //Dropdown Button
 .dropdown-menu {
@@ -13,9 +23,12 @@
   justify-content: space-between;
   align-items: center;
   height: 70px;
-  width: 170px;
-  margin-right: 20px;
+  width: 270px;
   transition: width 450ms ease-out;
+  @include my-breakpoint {
+
+
+  };
 
 
     &--ingredients {
@@ -49,7 +62,7 @@
       cursor: pointer;
       }
     &__options {
-      z-index: 1;
+      //z-index: 1;
       width: 100%;
       position: absolute;
       top:65px;
@@ -57,13 +70,12 @@
       padding-left: 0;
       color: map-get($color,white);
       display: grid;
-      grid-template-rows: repeat(auto-fill,1fr);
+      //grid-template-rows: repeat(auto-fill,1fr);
       grid-template-columns: repeat(3,1fr);
-      gap: 15px;
+
 
         &--ingredients {
           background-color: map-get($color,blue);
-          border-radius: 0 0 5px 5px;
         }
         &--appliances {
           background-color: map-get($color,green);
@@ -91,8 +103,12 @@
       }
     }
   &__extend {
-    width: 670px;
-    transition: width 450ms ease-out;
+    width: 400px;
+    transition: width 250ms ease-out;
+    @include my-breakpoint {
+      grid-template-columns: repeat(1, 1fr);
+      max-width: 430px;
+    };
   }
 }
 

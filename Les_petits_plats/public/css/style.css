@@ -25,9 +25,19 @@ body {
 
 .sort-inputs-container {
   max-width: 1300px;
-  display: flex;
+  display: grid;
+  grid-template-rows: repeat(auto-fill, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+  gap: 50px;
   margin: 20px 0;
   padding: 0;
+}
+@media only screen and (max-width: 680px) {
+  .sort-inputs-container {
+    grid-template-columns: repeat(1, 1fr);
+    margin-bottom: 10px;
+    gap: 10px;
+  }
 }
 
 .dropdown-menu {
@@ -36,8 +46,7 @@ body {
   justify-content: space-between;
   align-items: center;
   height: 70px;
-  width: 170px;
-  margin-right: 20px;
+  width: 270px;
   transition: width 450ms ease-out;
 }
 .dropdown-menu--ingredients {
@@ -71,7 +80,6 @@ body {
   cursor: pointer;
 }
 .dropdown-menu__options {
-  z-index: 1;
   width: 100%;
   position: absolute;
   top: 65px;
@@ -79,13 +87,10 @@ body {
   padding-left: 0;
   color: #FFF;
   display: grid;
-  grid-template-rows: repeat(auto-fill, 1fr);
   grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
 }
 .dropdown-menu__options--ingredients {
   background-color: #3282F7;
-  border-radius: 0 0 5px 5px;
 }
 .dropdown-menu__options--appliances {
   background-color: #68D9A4;
@@ -112,8 +117,14 @@ body {
   background-color: #ED6454;
 }
 .dropdown-menu__extend {
-  width: 670px;
-  transition: width 450ms ease-out;
+  width: 400px;
+  transition: width 250ms ease-out;
+}
+@media only screen and (max-width: 680px) {
+  .dropdown-menu__extend {
+    grid-template-columns: repeat(1, 1fr);
+    max-width: 430px;
+  }
 }
 
 .cards-result-container {

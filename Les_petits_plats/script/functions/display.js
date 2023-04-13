@@ -100,7 +100,7 @@ function createItemDropdown(type,tab){
 
         tab.forEach(element => {
             element.ingredients.forEach(data => {
-                htmlTagsIngredientsItemTab.push(data.ingredient.toLowerCase())
+                htmlTagsIngredientsItemTab.push(data.ingredient)
             })
         })
         htmlTagsIngredientsItemTab.sort();
@@ -112,7 +112,7 @@ function createItemDropdown(type,tab){
         return htmlTagsIngredientsItems
     } else if (type === "htmlTagsAppliancesItemTab") {
         tab.forEach(element => {
-            htmlTagsAppliancesItemTab.push(element.appliance.toLowerCase())
+            htmlTagsAppliancesItemTab.push(element.appliance)
         })
         htmlTagsAppliancesItemTab.sort();
         let htmlTagsApplianceItems = removeDuplicates(htmlTagsAppliancesItemTab);
@@ -124,7 +124,7 @@ function createItemDropdown(type,tab){
     } else if(type === "htmlTagsUstensilsItemTab") {
         tab.forEach(element =>{
             element.ustensils.forEach(data => {
-                htmlTagsUstensilsItemTab.push(data.toLowerCase())
+                htmlTagsUstensilsItemTab.push(data)
             })
         })
         htmlTagsUstensilsItemTab.sort()

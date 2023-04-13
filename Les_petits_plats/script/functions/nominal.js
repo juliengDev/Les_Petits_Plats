@@ -13,10 +13,7 @@ import {setupEventCreateTags,ingredientsTab} from "./tags.js"
 //     time,
 //     ustensils,
 // }] = recipes;
-
-
 let recipesToDisplay = [];
-
 
 function setupEventMainSearch(){
     const searchInput = document.getElementById("form-control");
@@ -25,10 +22,8 @@ function setupEventMainSearch(){
 
         const userInput = event.target.value.toLowerCase();
         if (userInput.length >= 3) {
-
             mainSearchDisplay(userInput);
             setupEventFilterTags();
-
 
         } else {
             defaultDisplay();
@@ -38,9 +33,9 @@ function setupEventMainSearch(){
 
 export function search(userInput){
 
-    if(userInput === "") {
+    if(userInput === "" && ingredientsTab.length === 0) {
         recipesToDisplay = recipes;
-    } else {
+    } else if(!userInput  && !ingredientsTab.length ) {
         recipesToDisplay = recipes.filter( recipe => {
             // boolean pour indiquer que la recipe en cours
             // contient la saisie utilisateur (userInput) dans le nom/les ingredients/la description
@@ -49,11 +44,13 @@ export function search(userInput){
             // Vérifier si le nom de la recette contient les données saisies par l'utilisateur
             // La méthode includes() détermine si un tableau typé possède un certain élément et renvoie true ou false selon le cas de figure.
             if (recipe.name.toLowerCase().includes(userInput)) {
+                // console.log("verif user input : recipe.name")
                 found = true;
             }
             // Vérifier si un ingrédient de la recette contient les données saisies par l'utilisateur
             recipe.ingredients.forEach( element => {
                 if (element.ingredient.toLowerCase().includes(userInput)) {
+                    // console.log("verif user input : recipe.ingredient")
                     found = true;
                     return true
                 }
@@ -75,67 +72,48 @@ export function search(userInput){
             //contient l'ensemble des tags d'ingredients dans sa liste d'ingredient
             let foundIngredientTags;
 
-            console.log(recipesToDisplay)
+            // console.log(recipesToDisplay)
             if(ingredientsTab.length === 0){
                  foundIngredientTags = true;
-                console.log("ingredient Tab tag est vide")
-                console.log(recipesToDisplay)
-                recipe.ingredients.forEach(item => {
-                    console.log(item)
-                })
+
             } else {
-                console.log("ingredient Tab tag n'est pas vide")
+
                 foundIngredientTags = false;
-                ingredientsTab.forEach( ingredientTag => {
-                    recipe.ingredients.forEach( item => {
-                        console.log("ingredientTag : " + ingredientTag)
-                        console.log("item.ingredient : " + item.ingredient)
+
+                ingredientsTab.every( ingredientTag => {
+                    recipe.ingredients.every( item => {
+
+                        // if(item.ingredient.toLowerCase().includes(ingredientTag.toLowerCase())){
+                        //     console.log("fonction include : "+ item.ingredient)
+                        //     foundIngredientTags= true;
+                        //     return true;
+                        // }
+
                         if(ingredientTag.toLowerCase() === item.ingredient.toLowerCase()) {
-                            console.log("ingredientTag === item.ingredient")
+                            console.log("tag verif dans recipe ingredient found: "+item.ingredient)
                             foundIngredientTags = true
-                            return true
+                            return false
                         }else{
-                            console.log("not found")
+
+                            console.log("tag verif dans recipe ingredient not found: "+item.ingredient)
                             foundIngredientTags = false
+                            return true
                         }
+
                     })
-                    if(!foundIngredientTags){
-                        return false
-                    }
+                    return foundIngredientTags
                 })
             }
-
-            console.log("return false :"+recipe.name)
+            console.log("Recipe Name :"+ recipe.name)
+            console.log("found userInput:" +found)
+            console.log("found tag ingredient :"+ foundIngredientTags)
         return found && foundIngredientTags
         })
+        console.log("function search :"+ recipesToDisplay)
+    }else {
+        console.log("Resultat not found")
     }
 }
-
-// export function searchIngredientsTag(tab){
-//     console.log(tab)
-//     recipesToDisplay = recipes.filter( recipe => {
-//         let foundIngredientTags = false;
-//         // console.log(recipesToDisplay)
-//         tab.forEach( ingredientTag => {
-//             recipe.ingredients.forEach( item => {
-//                 if(ingredientTag.toLowerCase() === item.ingredient.toLowerCase()) {
-//                     foundIngredientTags = true
-//                     return true
-//                 }else{
-//                     foundIngredientTags = false
-//                 }
-//             })
-//             if(!foundIngredientTags){
-//                 return false
-//             }
-//         })
-//
-//     return foundIngredientTags
-//     })
-//     console.log(recipesToDisplay)
-//     return recipesToDisplay
-// }
-
 function setupEventFilterTags(){
     const searchInputIngredients = "searchInputIngredients";
     const searchInputAppliances = "searchInputAppliances";

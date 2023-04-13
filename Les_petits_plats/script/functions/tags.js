@@ -1,6 +1,6 @@
 
 import {recipesDisplay, tagsDisplay} from "./display.js"
-import {search} from "./nominal.js"
+import {recipesToDisplay, search} from "./nominal.js"
 
 let ingredientsTab =[];
 
@@ -13,15 +13,17 @@ function setupEventCreateTags(type){
         listItems.forEach(item=>{
             item.addEventListener('click',event => {
                 let tag = event.target.textContent;
-                ingredientsTab.push(tag)
-                console.log(ingredientsTab)
-                createTag(tag,"ingredient")
-                console.log(searchInput.value)
-                search(searchInput.value);
-                recipesDisplay();
-                tagsDisplay();
-                setupEventDeleteTags('ingredient')
-
+                //Si le tag existe alors ne fait rien
+                // Sinon ajoute dans le tableau
+                if(!ingredientsTab.includes(tag)) {
+                    ingredientsTab.push(tag);
+                    createTag(tag, "ingredient");
+                    search(searchInput.value);
+                    console.log("fonction setupEventCreateTags: "+ recipesToDisplay);
+                    recipesDisplay();
+                    tagsDisplay();
+                    setupEventDeleteTags('ingredient');
+                }
             })
         })
     }else if(type==="Appliances"){
@@ -118,7 +120,6 @@ function setupEventDeleteTags(type){
             const tagText = event.currentTarget.previousElementSibling.textContent
             tagDiv.remove();
 
-
             if(type==="ingredient"){
                  ingredientsTab.forEach(ingredient => {
                     if(ingredient === tagText) {
@@ -126,34 +127,9 @@ function setupEventDeleteTags(type){
                         ingredientsTab.splice(ingredientsTab.indexOf(ingredient),1)
                     }
                 })
-                // Yipikahiye Mother Fucker !!!!!!!!!!
-
-
-
-
-
-
-                //  ingredientsTab = ingredientsTab.filter( (value, index, arr) => {
-                //     // si la valeur à l'index actuelle vaut la valeur qu'on cherche (tagText)
-                //     if (value === tagText) {
-                //         console.log("value : "+value)
-                //         console.log("index : "+index)
-                //         console.log("array : "+arr)
-                //         // supprime la valeur dans le tableau
-                //         arr.splice(index, 1);
-                //         return true;
-                //     }
-                //     return false;
-                // })
-                console.log(ingredientsTab)
             }
-
-
-
-
         });
     });
-
 }
 
 export {setupEventCreateTags,setupEventDeleteTags}
