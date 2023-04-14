@@ -10,11 +10,16 @@ let htmlRecipes="";
  * Fonction en charge de l’affichage des Cards
  */
 function recipesDisplay(){
+    const errorMessage = document.querySelector('.search-bar__error');
 
+    if(recipesToDisplay.length === 0){
+        errorMessage.textContent = "Aucune recette ne correspond à votre critère"
+    }else {
+        errorMessage.textContent = ""
+    }
     let cardContainer = document.getElementById('card-container')
     //Suppression de l'ancien affichage des cards par default
     clearDisplay();
-
     recipesToDisplay.forEach( recipe => {
 
             //Creation des elements HTML
@@ -65,7 +70,7 @@ function recipesDisplay(){
 /**
  * Fonction en charge de l'affichage par defaut des menus dropdown des filtres de recherche avances
  */
-function tagsDisplay(){
+function itemDropdownDisplay(){
     clearDisplayDropdownTags();
 
     const ingredientsItemTab = "htmlTagsIngredientsItemTab";
@@ -163,6 +168,7 @@ function createHtmlTagsItems(tab,menu,type){
 function clearDisplay(){
     let cardContainer = document.getElementById('card-container');
     while(cardContainer.firstChild) {
+
         cardContainer.removeChild(cardContainer.firstChild)
     }
 }
@@ -182,4 +188,4 @@ function clearDisplayDropdownTags(){
 
 
 export {clearDisplay,clearDisplayDropdownTags};
-export {recipesDisplay,tagsDisplay,createItemDropdown,createHtmlTagsItems}
+export {recipesDisplay,itemDropdownDisplay,createItemDropdown,createHtmlTagsItems}

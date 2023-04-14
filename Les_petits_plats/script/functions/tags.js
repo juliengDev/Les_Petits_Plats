@@ -1,6 +1,6 @@
 
-import {recipesDisplay, tagsDisplay} from "./display.js"
-import {recipesToDisplay, search} from "./nominal.js"
+import {recipesDisplay, itemDropdownDisplay} from "./display.js"
+import {mainSearchDisplay, recipesToDisplay, search} from "./nominal.js"
 
 let ingredientsTab =[];
 
@@ -19,9 +19,9 @@ function setupEventCreateTags(type){
                     ingredientsTab.push(tag);
                     createTag(tag, "ingredient");
                     search(searchInput.value);
-                    console.log("fonction setupEventCreateTags: "+ recipesToDisplay);
+                    // console.log("fonction setupEventCreateTags: "+ recipesToDisplay);
                     recipesDisplay();
-                    tagsDisplay();
+                    itemDropdownDisplay();
                     setupEventDeleteTags('ingredient');
                 }
             })
@@ -117,7 +117,8 @@ function setupEventDeleteTags(type){
     buttonsCloseTag.forEach(button => {
         button.addEventListener('click', (event) => {
             const tagDiv = button.closest(' .tags-container-parent ');
-            const tagText = event.currentTarget.previousElementSibling.textContent
+            const tagText = event.currentTarget.previousElementSibling.textContent;
+            const searchInput = document.getElementById("form-control");
             tagDiv.remove();
 
             if(type==="ingredient"){
@@ -128,6 +129,7 @@ function setupEventDeleteTags(type){
                     }
                 })
             }
+            mainSearchDisplay(searchInput.value)
         });
     });
 }

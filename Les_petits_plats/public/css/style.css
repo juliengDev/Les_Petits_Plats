@@ -233,6 +233,8 @@ body {
 }
 
 .input-search-container {
+  display: flex;
+  flex-direction: column;
   max-width: 1240px;
 }
 
@@ -250,6 +252,11 @@ body {
   right: 20px;
   top: 50%;
   transform: translateY(-50%);
+}
+.search-bar__error {
+  margin: 5px;
+  font-family: "DM Sans", sans-serif;
+  color: #D04F4F;
 }
 
 .tags-container {

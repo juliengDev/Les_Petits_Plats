@@ -1,5 +1,5 @@
 import {recipes} from "../recipes.js";
-import {recipesDisplay,tagsDisplay,createHtmlTagsItems} from "./display.js";
+import {recipesDisplay, itemDropdownDisplay, createHtmlTagsItems, clearDisplay} from "./display.js";
 import {removeDuplicates} from "./array.js"
 import {setupEventCreateTags,ingredientsTab} from "./tags.js"
 
@@ -15,6 +15,7 @@ import {setupEventCreateTags,ingredientsTab} from "./tags.js"
 // }] = recipes;
 let recipesToDisplay = [];
 
+
 function setupEventMainSearch(){
     const searchInput = document.getElementById("form-control");
 
@@ -23,20 +24,23 @@ function setupEventMainSearch(){
         const userInput = event.target.value.toLowerCase();
         if (userInput.length >= 3) {
             mainSearchDisplay(userInput);
-            setupEventFilterTags();
+
 
         } else {
-            defaultDisplay();
+            mainSearchDisplay("")
         }
     })
 }
 
-export function search(userInput){
-
-    if(userInput === "" && ingredientsTab.length === 0) {
+export function search(userInput) {
+    // Recherche vide et pas de tags
+    if ((userInput === "") && (ingredientsTab.length === 0)) {
         recipesToDisplay = recipes;
-    } else if(!userInput  && !ingredientsTab.length ) {
-        recipesToDisplay = recipes.filter( recipe => {
+    }
+    //Recherche active et Tags actif
+    else {
+
+        recipesToDisplay = recipes.filter(recipe => {
             // boolean pour indiquer que la recipe en cours
             // contient la saisie utilisateur (userInput) dans le nom/les ingredients/la description
             let found = false;
@@ -48,7 +52,7 @@ export function search(userInput){
                 found = true;
             }
             // Vérifier si un ingrédient de la recette contient les données saisies par l'utilisateur
-            recipe.ingredients.forEach( element => {
+            recipe.ingredients.forEach(element => {
                 if (element.ingredient.toLowerCase().includes(userInput)) {
                     // console.log("verif user input : recipe.ingredient")
                     found = true;
@@ -73,15 +77,15 @@ export function search(userInput){
             let foundIngredientTags;
 
             // console.log(recipesToDisplay)
-            if(ingredientsTab.length === 0){
-                 foundIngredientTags = true;
+            if (ingredientsTab.length === 0) {
+                foundIngredientTags = true;
 
             } else {
 
                 foundIngredientTags = false;
 
-                ingredientsTab.every( ingredientTag => {
-                    recipe.ingredients.every( item => {
+                ingredientsTab.every(ingredientTag => {
+                    recipe.ingredients.every(item => {
 
                         // if(item.ingredient.toLowerCase().includes(ingredientTag.toLowerCase())){
                         //     console.log("fonction include : "+ item.ingredient)
@@ -89,30 +93,31 @@ export function search(userInput){
                         //     return true;
                         // }
 
-                        if(ingredientTag.toLowerCase() === item.ingredient.toLowerCase()) {
-                            console.log("tag verif dans recipe ingredient found: "+item.ingredient)
+                        if (ingredientTag.toLowerCase() === item.ingredient.toLowerCase()) {
+                            console.log("tag verif dans recipe ingredient found: " + item.ingredient)
                             foundIngredientTags = true
                             return false
-                        }else{
+                        } else {
 
-                            console.log("tag verif dans recipe ingredient not found: "+item.ingredient)
+                            console.log("tag verif dans recipe ingredient not found: " + item.ingredient)
                             foundIngredientTags = false
                             return true
                         }
-
                     })
                     return foundIngredientTags
                 })
             }
-            console.log("Recipe Name :"+ recipe.name)
-            console.log("found userInput:" +found)
-            console.log("found tag ingredient :"+ foundIngredientTags)
-        return found && foundIngredientTags
+            console.log("Recipe Name :" + recipe.name)
+            console.log("found userInput:" + found)
+            console.log("found tag ingredient :" + foundIngredientTags)
+            return found && foundIngredientTags
         })
-        console.log("function search :"+ recipesToDisplay)
-    }else {
-        console.log("Resultat not found")
+        console.log("function search :" + recipesToDisplay)
     }
+
+
+
+
 }
 function setupEventFilterTags(){
     const searchInputIngredients = "searchInputIngredients";
@@ -206,19 +211,16 @@ function setupEventFilterTagsSearch(filter){
         })
     }
 }
-function defaultDisplay(){
-search("");
-recipesDisplay();
-tagsDisplay();
-}
+
 export function mainSearchDisplay(input){
 search(input);
 recipesDisplay();
-tagsDisplay();
+itemDropdownDisplay();
+setupEventFilterTags();
 }
 export function initNominal(){
+mainSearchDisplay("");
 setupEventMainSearch();
-defaultDisplay();
 }
 
 export {recipesToDisplay}
