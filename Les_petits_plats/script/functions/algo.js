@@ -1,11 +1,23 @@
 import {recipes} from "../recipes.js";
 import {appliancesTab, ingredientsTab, ustensilsTab} from "./tags.js";
+
+/**
+ * @typedef {Object} Recipe Recette
+ * @property {string} appliance Nom de l'appareil
+ * @property {string} description Description de la recette
+ * @property {number} id ID associe a la recette
+ * @property {{ingredient:string, quantity:number, unit:string}[]} ingredients Liste des ingredients associes a la recette
+ * @property {string} name Titre de la recette
+ * @property {number} servings Nombre de personnes
+ * @property {number} time Temps de preparation
+ * @property {Array<string>} ustensils Ustensiles utilises pour la recette
+ *
+ */
 /**
  * Contient les recettes a afficher
  * @type {Array<Recipe>} Recette a afficher
  */
 let recipesToDisplay = [];
-
 /**
  * Assigne la ou les recettes en cours dans la variable recipeToDisplay en filtrant les donnees du champs de recherche principal
  * et des champs de recherches avances (Ingredient, Appareils et Ustensils)
@@ -51,15 +63,17 @@ function search(userInput) {
             // Tableau des ingredients d'une recette : recipe.ingredients = [ 'banane', 'sucre', 'chocolat' ]
 
             // Tableau des tags ingredients : ingredientTab v1 = [ 'chocolat', 'banane']
-            // Resultat recherche v1 : true car les tags selectionnes sont bien present dans la recette
+            /* Resultat recherche v1 = true car les tags selectionnes dans la liste des ingredients disponibles
+             sont bien present dans la recette */
 
-            // Tableau des ingredients d'une recette :ingredientTab v2 = [ 'café', 'banane', 'sel', 'oeuf', 'patate' , 'paté' ]
-            // Resultat recherche v2 : false car les tags selectionnes ne sont pas tous presente dans la recette
+            // Tableau des ingredients d'une recette : ingredientTab v2 = [ 'café', 'banane', 'sel', 'sucre', 'patate']
+            /* Resultat recherche v2 = false car les tags selectionnes dans la liste des ingredients disponibles
+            ne sont pas tous presents dans la recette */
 
             /* Declaration des variables : foundIngredientTags, foundApplianceTags et foundUstensilTags.
             Elles sont valorisees en fonction du resultat retourner par la methode every sur
             les ingredients, les appareils et les utsentiles de la recette */
-            /* boolean pour indiquer que la recipe en cours contient
+            /* On declare un booleen pour indiquer que la recette en cours contient
             le tag dans sa liste d'elements  (ingredient/appareils et ustensiles) */
             let foundIngredientTags = false;
             let foundApplianceTags = false;
@@ -116,8 +130,8 @@ function search(userInput) {
                     return foundUstensilTags;
                 })
             }
-            // On retourne la valeur des differents booleens a la fonction filter
-            return found && foundIngredientTags && foundApplianceTags && foundUstensilTags;
+        // On retourne la valeur des differents booleens a la fonction filter
+        return found && foundIngredientTags && foundApplianceTags && foundUstensilTags;
         })
     }
 }

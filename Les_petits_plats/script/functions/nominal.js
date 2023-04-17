@@ -2,19 +2,21 @@ import {recipesToDisplay, search} from "./algo.js";
 import {createHtmlTagsItems, itemDropdownDisplay, recipesDisplay} from "./display.js";
 import {removeDuplicates} from "./array.js";
 import {setupEventCreateTags} from "./tags.js";
-
 /**
- * @typedef {Object} Recipe Recette
- * @property {string} appliance Nom de l'appareil
- * @property {string} description Description de la recette
- * @property {number} id ID associe a la recette
- * @property {{ingredient:string, quantity:number, unit:string}[]} ingredients Liste des ingredients associes a la recette
- * @property {string} name Titre de la recette
- * @property {number} servings Nombre de personnes
- * @property {number} time Temps de preparation
- * @property {Array<string>} ustensils Ustensiles utilises pour la recette
+ * Permet de lancer plusieurs fonctions :
+ * search(input)
+ * recipesDisplay()
+ * itemDropdownDisplay()
+ * setupEventFilterTags()
  *
+ * @param input {string} Correspond au champ de saisie de la recherche principale
  */
+function mainSearchDisplay(input){
+    search(input);
+    recipesDisplay();
+    itemDropdownDisplay();
+    setupEventFilterTags();
+}
 /**
  * Permet l'initialisation de l'event listener sur l'input de recherche principale
  * Cet event listener va initialiser la fonction mainSearchDisplay avec comme parametre,
@@ -44,15 +46,23 @@ function setupEventFilterTags(){
     setupEventFilterTagsSearch(searchInputUstensils);
 }
 /**
- * Permet l'initialisation de l'event listener associe a l'input du filtre de recherche avance
- * Va cree un tableau contenant la recherche de l'utlisateur
- * @param filter {string} Correspond au filtre de recherche avance
+ * Permet l'initialisation de l'event listener associe a l'input du filtre de recherche avance.
+ * Pour chacun des filtres avances va effectuer les actions suivantes :
+ * - Cree un tableau contenant les elements associes a la recherche de l'utilisateur
+ * - Appel des fonctions de tri sur le tableau pour retirer les doublons et trier les elements par ordre alphabetique
+ * - Appel la fonction createHtmlTagsItems()
+ * - Appel la fonction setupEventCreateTags()
+ * @param filter {string} Correspond au champ de saisie du filtre de recherche avance
  */
 function setupEventFilterTagsSearch(filter){
     if(filter === "searchInputIngredients") {
         const ingredientsType = "Ingredients"
         const searchInputIngredients = document.getElementById("sort-by-ingredients");
         searchInputIngredients.addEventListener('input', event => {
+            /**
+             *
+             * @type {Array<string>}
+             */
             let ingredientsSearchResult =[];
             const ingredientsHTMLUL = document.querySelector('.dropdown-menu__options--ingredients');
             const userInput = event.target.value.toLowerCase();
@@ -65,7 +75,7 @@ function setupEventFilterTagsSearch(filter){
             })
             ingredientsSearchResult = removeDuplicates(ingredientsSearchResult);
             ingredientsSearchResult = ingredientsSearchResult.sort();
-            //Reset de ingredientsList
+            //Reset de la liste des ingredients
             ingredientsHTMLUL.innerHTML="";
             createHtmlTagsItems(ingredientsSearchResult,ingredientsHTMLUL,"ingredient");
             setupEventCreateTags(ingredientsType);
@@ -73,8 +83,11 @@ function setupEventFilterTagsSearch(filter){
     }else if(filter==="searchInputAppliances") {
         const appliancesType = "Appliances";
         const searchInputAppliances = document.getElementById("sort-by-appareils");
-
         searchInputAppliances.addEventListener('input', event => {
+            /**
+             *
+             * @type {Array<string>}
+             */
             let appliancesSearchResult = [];
             const appliancesHTMLUL = document.querySelector('.dropdown-menu__options--appliances');
             const userInput = event.target.value.toLowerCase();
@@ -83,12 +96,10 @@ function setupEventFilterTagsSearch(filter){
                 if(recipe.appliance.toLowerCase().includes(userInput)) {
                     appliancesSearchResult.push(recipe.appliance)
                 }
-
             })
             appliancesSearchResult = removeDuplicates(appliancesSearchResult);
             appliancesSearchResult = appliancesSearchResult.sort();
-            // console.log(appliancesSearchResult)
-
+            //Reset de la liste des appareils
             appliancesHTMLUL.innerHTML="";
             createHtmlTagsItems(appliancesSearchResult,appliancesHTMLUL,"appliance");
             setupEventCreateTags(appliancesType);
@@ -98,20 +109,23 @@ function setupEventFilterTagsSearch(filter){
     }else if(filter==="searchInputUstensils") {
         const ustensilsType = "Ustensils"
         const searchInputUstensils = document.getElementById("sort-by-ustensils");
-
         searchInputUstensils.addEventListener('input', event => {
+            /**
+             *
+             * @type {Array<string>}
+             */
             let ustensilsSearchResult=[];
             const ustensilsHTMLUL = document.querySelector('.dropdown-menu__options--ustensils')
             const userInput = event.target.value.toLowerCase();
 
             recipesToDisplay.forEach(recipe => {
                 recipe.ustensils.forEach(item =>{
-
                     if(item.toLowerCase().includes(userInput)) {
                         ustensilsSearchResult.push(item)
                     }
                 })
             })
+            //Reset de la liste des ustensiles
             ustensilsHTMLUL.innerHTML="";
             ustensilsSearchResult =removeDuplicates(ustensilsSearchResult);
             ustensilsSearchResult = ustensilsSearchResult.sort();
@@ -120,12 +134,10 @@ function setupEventFilterTagsSearch(filter){
         })
     }
 }
-function mainSearchDisplay(input){
-search(input);
-recipesDisplay();
-itemDropdownDisplay();
-setupEventFilterTags();
-}
+
+/**
+ * Appel les fonctions mainSearchDisplay() et setupEventMainSearch()
+ */
 function initNominal(){
 mainSearchDisplay("");
 setupEventMainSearch();
