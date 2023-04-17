@@ -4,7 +4,7 @@ import {initNominal} from "./functions/nominal.js";
 initDropdown();
 initNominal();
 
-
+// test
 /*
 "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
