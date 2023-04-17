@@ -2,7 +2,6 @@
 import {initDropdown} from   "./functions/dropdown.js"
 import {initNominal} from "./functions/nominal.js";
 
-
 initDropdown();
 initNominal();
 
@@ -15,40 +14,7 @@ initNominal();
 * Retourne le tableau des recettes mis a jour avec les informations relatives
 * aux donnees des elements tries par la recherche principale
 * et les tags.
-*
-*   */
-
-
-// function recipeToDisplay(RecipeSortTab, RecipeTag) {
-//     console.log("en attente")
-// }
-
-// function searchIngredientsTag(ingredientsTab){
-//     recipesToDisplay = recipes.filter( recipe => {
-//         let foundIngredientTags =false;
-//
-//         if(ingredientsTab.length === 0){
-//             foundIngredientTags = true;
-//
-//         } else {
-//             foundIngredientTags = false;
-//             ingredientsTab.forEach( ingredientTag => {
-//                 recipe.ingredients.forEach( item => {
-//                     if(ingredientTag.toLowerCase() === item.ingredient.toLowerCase()) {
-//                         foundIngredientTags = true
-//                         return true
-//                     }else{
-//                         foundIngredientTags = false
-//                     }
-//                 })
-//                 if(!foundIngredientTags){
-//                     return false
-//                 }
-//             })
-//         }
-//     })
-//     return foundIngredientTags
-// }
+*/
 
 /*
 * =============== WORKFLOW ===============
@@ -104,7 +70,3 @@ SINON :
 *
 
 * */
-
-// --------------------------------------------------------
-
-/*  */

@@ -1,6 +1,6 @@
 import {removeDuplicates} from "./array.js"
-import {recipesToDisplay} from  "./nominal.js"
 import {setupEventCreateTags} from "./tags.js";
+import {recipesToDisplay} from "./algo.js";
 
 
 //Variable Global

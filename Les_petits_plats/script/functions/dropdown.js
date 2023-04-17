@@ -39,9 +39,10 @@ function toggleDropdownList(menuCategory,listCategory,input,type){
     }
 }
 
-export function initDropdown(){
+function initDropdown(){
     sortLabelIconIngredient.addEventListener('click',toggleDropDownListIngredients);
     sortLabelIconAppareils.addEventListener('click',toggleDropDownListAppareils);
     sortLabelIconUstensiles.addEventListener('click',toggleDropDownListUstensiles);
 }
 
+export {initDropdown}

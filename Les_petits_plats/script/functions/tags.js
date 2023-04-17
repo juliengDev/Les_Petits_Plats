@@ -1,13 +1,18 @@
 
-import {recipesDisplay, itemDropdownDisplay} from "./display.js"
-import {mainSearchDisplay, recipesToDisplay, search} from "./nominal.js"
+import {recipesDisplay,itemDropdownDisplay} from "./display.js"
+import {mainSearchDisplay} from "./nominal.js"
+import {search} from "./algo.js";
+
+
 
 let ingredientsTab =[];
+let appliancesTab=[];
+let ustensilsTab =[];
 
 function setupEventCreateTags(type){
 
     if(type==="Ingredients") {
-        const listItems = document.querySelectorAll(".dropdown-menu__option-item--ingredients")
+        const listItems = document.querySelectorAll(".dropdown-menu__option-item--ingredients");
         const searchInput = document.getElementById("form-control");
 
         listItems.forEach(item=>{
@@ -18,6 +23,7 @@ function setupEventCreateTags(type){
                 if(!ingredientsTab.includes(tag)) {
                     ingredientsTab.push(tag);
                     createTag(tag, "ingredient");
+                    console.log("searchInput value :"+ searchInput.value)
                     search(searchInput.value);
                     // console.log("fonction setupEventCreateTags: "+ recipesToDisplay);
                     recipesDisplay();
@@ -27,23 +33,37 @@ function setupEventCreateTags(type){
             })
         })
     }else if(type==="Appliances"){
-        const listItems = document.querySelectorAll(".dropdown-menu__options-item--appliances")
+        const listItems = document.querySelectorAll(".dropdown-menu__options-item--appliances");
+        const searchInput = document.getElementById("form-control");
 
         listItems.forEach(item=>{
             item.addEventListener('click',event => {
                 let tag = event.target.textContent;
-                createTag(tag,"appliance")
-                setupEventDeleteTags()
+                if(!appliancesTab.includes(tag)){
+                    appliancesTab.push(tag);
+                    createTag(tag,"appliance");
+                    search(searchInput.value);
+                    recipesDisplay();
+                    itemDropdownDisplay();
+                    setupEventDeleteTags('appliance')
+                }
             })
         })
     }else if(type==="Ustensils"){
-        const listItems = document.querySelectorAll(".dropdown-menu__options-item--ustensils")
+        const listItems = document.querySelectorAll(".dropdown-menu__options-item--ustensils");
+        const searchInput = document.getElementById("form-control");
 
         listItems.forEach(item=>{
             item.addEventListener('click',event => {
                 let tag = event.target.textContent;
-                createTag(tag,"ustensils")
-                setupEventDeleteTags()
+                if(!ustensilsTab.includes(tag)){
+                    ustensilsTab.push(tag);
+                    createTag(tag,"ustensils");
+                    search(searchInput.value);
+                    recipesDisplay();
+                    itemDropdownDisplay();
+                    setupEventDeleteTags('ustensils');
+                }
             })
         })
     }
@@ -125,7 +145,19 @@ function setupEventDeleteTags(type){
                  ingredientsTab.forEach(ingredient => {
                     if(ingredient === tagText) {
                         // console.log(ingredientsTab.indexOf(ingredient))
-                        ingredientsTab.splice(ingredientsTab.indexOf(ingredient),1)
+                        ingredientsTab.splice(ingredientsTab.indexOf(ingredient),1);
+                    }
+                })
+            }else if (type ==='appliance'){
+                appliancesTab.forEach(appliance => {
+                    if(appliance === tagText) {
+                        appliancesTab.splice(appliancesTab.indexOf(appliance),1);
+                    }
+                })
+            }else if(type === 'ustensils'){
+                ustensilsTab.forEach(ustensil => {
+                    if(ustensil === tagText) {
+                        ustensilsTab.splice(ustensilsTab.indexOf(ustensil),1);
                     }
                 })
             }
@@ -135,4 +167,4 @@ function setupEventDeleteTags(type){
 }
 
 export {setupEventCreateTags,setupEventDeleteTags}
-export {ingredientsTab}
+export {ingredientsTab,appliancesTab,ustensilsTab}
