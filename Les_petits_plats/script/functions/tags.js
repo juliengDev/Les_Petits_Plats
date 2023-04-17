@@ -2,8 +2,6 @@
 import {recipesDisplay,itemDropdownDisplay} from "./display.js"
 import {mainSearchDisplay} from "./nominal.js"
 import {search} from "./algo.js";
-
-
 //Variable Globales
 /**
  *
@@ -49,7 +47,6 @@ function setupEventCreateTags(type){
                 if(!ingredientsTab.includes(tag)) {
                     ingredientsTab.push(tag);
                     createTag(tag, "ingredient");
-                    console.log("searchInput value :"+ searchInput.value)
                     search(searchInput.value);
                     recipesDisplay();
                     itemDropdownDisplay();
@@ -92,7 +89,6 @@ function setupEventCreateTags(type){
             })
         })
     }
-
 }
 
 /**
