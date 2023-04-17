@@ -14,7 +14,7 @@ import {appliancesTab, ingredientsTab, ustensilsTab} from "./tags.js";
  *
  */
 /**
- * Contient les recettes a afficher
+ * Variable globale - Contient les recettes a afficher
  * @type {Array<Recipe>} Recette a afficher
  */
 let recipesToDisplay = [];

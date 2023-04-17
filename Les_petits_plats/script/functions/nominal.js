@@ -34,7 +34,7 @@ function setupEventMainSearch(){
     })
 }
 /**
- * Appel les fonctions setupEventFilterTagsSearch des filtres de recherche avances
+ * Appel les fonctions setupEventFilterTagsSearch pour chaque filtre de recherche avance
  */
 function setupEventFilterTags(){
     const searchInputIngredients = "searchInputIngredients";
