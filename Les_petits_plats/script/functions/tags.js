@@ -4,11 +4,37 @@ import {mainSearchDisplay} from "./nominal.js"
 import {search} from "./algo.js";
 
 
-
+//Variable Globales
+/**
+ *
+ * @type {Array<string>}
+ */
 let ingredientsTab =[];
+/**
+ *
+ * @type {Array<string>}
+ */
 let appliancesTab=[];
+/**
+ *
+ * @type {Array<string>}
+ */
 let ustensilsTab =[];
 
+/**
+ * Permet d'initialiser l'event listener du clic sur l'element du filtre avance
+ * Va ensuite cree le tag depuis cet element en realisant les operations suivantes :
+ * - Verifie si le tag est deja presente dans le tableau de tag associe
+ * - Si oui : ne fait rien
+ * - Si non :
+ *      - Ajoute l'element dans le tableau de tags
+ *      - Appel de la fonction createTag()
+ *      - Appel de la fonction recipesDisplay()
+ *      - Appel de la fonction itemDropdownDisplay()
+ *      - Appel de la fonction setupEventDeleteTags()
+
+ * @param {string} type Nom du filtre avance
+ */
 function setupEventCreateTags(type){
 
     if(type==="Ingredients") {
@@ -19,13 +45,12 @@ function setupEventCreateTags(type){
             item.addEventListener('click',event => {
                 let tag = event.target.textContent;
                 //Si le tag existe alors ne fait rien
-                // Sinon ajoute dans le tableau
+                // Sinon ajoute le tag dans le tableau
                 if(!ingredientsTab.includes(tag)) {
                     ingredientsTab.push(tag);
                     createTag(tag, "ingredient");
                     console.log("searchInput value :"+ searchInput.value)
                     search(searchInput.value);
-                    // console.log("fonction setupEventCreateTags: "+ recipesToDisplay);
                     recipesDisplay();
                     itemDropdownDisplay();
                     setupEventDeleteTags('ingredient');
@@ -69,6 +94,12 @@ function setupEventCreateTags(type){
     }
 
 }
+
+/**
+ *  Permet de cree l'element et d'ajouter l'element HTML tag
+ * @param {string} tag Nom de l'element tag a cree
+ * @param {string} type Nom du filtre avance
+ */
 function createTag(tag,type){
 
     if(type==="ingredient"){
@@ -131,6 +162,11 @@ function createTag(tag,type){
     }
 }
 
+/**
+ * Permet d'initialiser l'event listener au clic sur l'element HTML tag a supprimer
+ * Utilisation de la methode splice pour la suppression de l'element selectionner
+ * @param {string} type Nom du filtre avance
+ */
 function setupEventDeleteTags(type){
 
     const buttonsCloseTag = document.querySelectorAll(".tags-container__tag-close-button");
@@ -144,7 +180,6 @@ function setupEventDeleteTags(type){
             if(type==="ingredient"){
                  ingredientsTab.forEach(ingredient => {
                     if(ingredient === tagText) {
-                        // console.log(ingredientsTab.indexOf(ingredient))
                         ingredientsTab.splice(ingredientsTab.indexOf(ingredient),1);
                     }
                 })
