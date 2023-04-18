@@ -18,20 +18,19 @@ function recipesDisplay(){
     let cardContainer = document.getElementById('card-container');
     //Suppression de l'ancien affichage des cards
     clearDisplay();
-    recipesToDisplay.forEach( recipe => {
-            //Creation des elements HTML
-            let cardContainerCards = document.createElement('div');
-            let cardImage = document.createElement('div');
-            let cardBody = document.createElement('div');
-            let descriptionIngredients = document.createElement('div');
+    for (let recipe of recipesToDisplay) {
+        let cardContainerCards = document.createElement('div');
+        let cardImage = document.createElement('div');
+        let cardBody = document.createElement('div');
+        let descriptionIngredients = document.createElement('div');
 
-            //Modification des elements HTML
-            cardContainer.classList.add("card-container", "grid");
-            cardContainerCards.classList.add("card-container__card", "card", "box", "box-1", "grid-item");
-            cardImage.classList.add("card-img-top", "card-container__card-img");
-            cardBody.classList.add("card-body", "card-container__card-body");
-            descriptionIngredients.classList.add("col-6", "card-container__card-description-ingredients");
-            htmlRecipes = `
+        //Modification des elements HTML
+        cardContainer.classList.add("card-container", "grid");
+        cardContainerCards.classList.add("card-container__card", "card", "box", "box-1", "grid-item");
+        cardImage.classList.add("card-img-top", "card-container__card-img");
+        cardBody.classList.add("card-body", "card-container__card-body");
+        descriptionIngredients.classList.add("col-6", "card-container__card-description-ingredients");
+        htmlRecipes = `
         <div class="card-container__card-title">
          <h2 id="recipeName">${recipe.name}</h2>
          <div class="card-container__card-title-timer">
@@ -42,25 +41,23 @@ function recipesDisplay(){
         <div class="card-container__card-description">
         <div class="col-6 card-container__card-description-ingredients">`;
 
-            recipe.ingredients.forEach(ingredient => {
-                htmlRecipes += `<p><span id ="ingredientName" class="bold">${ingredient.ingredient} :</span> <span id="ingredientQuantity">${ingredient.quantity ?? ""}</span> <span id="ingredientUnit">${ingredient.unit ?? ""}</span></p>`
-            })
+        for (let ingredient of recipe.ingredients) {
+            htmlRecipes += `<p><span id ="ingredientName" class="bold">${ingredient.ingredient} :</span> <span id="ingredientQuantity">${ingredient.quantity ?? ""}</span> <span id="ingredientUnit">${ingredient.unit ?? ""}</span></p>`
+        }
 
-            htmlRecipes +=`
+        htmlRecipes +=`
          </div>
          <div class="col-6 card-container__card-description-texte">
               <p id="descriptionRecipe">${recipe.description}</p>
          </div>
          </div>`;
 
-            //Ajout des elements HTML
-            cardBody.innerHTML= htmlRecipes;
-            cardContainer.appendChild(cardContainerCards);
-            cardContainerCards.appendChild(cardImage);
-            cardContainerCards.appendChild(cardBody);
-
-        }
-    )
+        //Ajout des elements HTML
+        cardBody.innerHTML= htmlRecipes;
+        cardContainer.appendChild(cardContainerCards);
+        cardContainerCards.appendChild(cardImage);
+        cardContainerCards.appendChild(cardBody);
+    }
 }
 /**
  * En charge de l'appel des fonctions suivantes :
@@ -101,31 +98,33 @@ function createItemDropdown(type,tab){
     const dropdownMenuUstensiles = document.querySelector('.dropdown-menu__options--ustensils');
 
     if(type === "htmlTagsIngredientsItemTab") {
-        tab.forEach(element => {
-            element.ingredients.forEach(data => {
+        for (let element of tab) {
+            for (let element of tab){
                 htmlTagsIngredientsItemTab.push(data.ingredient);
-            })
-        })
+            }
+        }
         htmlTagsIngredientsItemTab.sort();
         htmlTagsIngredientsItemTab = removeDuplicates(htmlTagsIngredientsItemTab);
         createHtmlTagsItems(htmlTagsIngredientsItemTab,dropdownMenuIngredients,ingredientType);
         setupEventCreateTags("Ingredients");
 
     } else if (type === "htmlTagsAppliancesItemTab") {
-        tab.forEach(element => {
+        for (let element of tab) {
             htmlTagsAppliancesItemTab.push(element.appliance);
-        })
+        }
+
         htmlTagsAppliancesItemTab.sort();
         htmlTagsAppliancesItemTab = removeDuplicates(htmlTagsAppliancesItemTab);
         createHtmlTagsItems(htmlTagsAppliancesItemTab,dropdownMenuAppliances,applianceType);
         setupEventCreateTags("Appliances");
 
     } else if(type === "htmlTagsUstensilsItemTab") {
-        tab.forEach(element =>{
-            element.ustensils.forEach(data => {
+        for (let element of tab){
+            for (let data of element.ustensils){
                 htmlTagsUstensilsItemTab.push(data);
-            })
-        })
+            }
+        }
+
         htmlTagsUstensilsItemTab.sort()
         htmlTagsUstensilsItemTab = removeDuplicates(htmlTagsUstensilsItemTab);
         createHtmlTagsItems(htmlTagsUstensilsItemTab,dropdownMenuUstensiles,ustensilType);
@@ -140,7 +139,7 @@ function createItemDropdown(type,tab){
  * @param {String} type Nom du filtre avance
  */
 function createHtmlTagsItems(tab,menu,type){
-    tab.forEach(element => {
+    for (let element of tab){
         let htmlItem = document.createElement('li');
         if(type === "ingredient") {
             htmlItem.classList.add("dropdown-menu__option-item","dropdown-menu__option-item--ingredients");
@@ -151,7 +150,7 @@ function createHtmlTagsItems(tab,menu,type){
         }
         htmlItem.textContent = element;
         menu.appendChild(htmlItem);
-    })
+    }
 }
 
 /**
