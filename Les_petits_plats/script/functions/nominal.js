@@ -66,13 +66,13 @@ function setupEventFilterTagsSearch(filter){
             let ingredientsSearchResult =[];
             const ingredientsHTMLUL = document.querySelector('.dropdown-menu__options--ingredients');
             const userInput = event.target.value.toLowerCase();
-            recipesToDisplay.forEach(recipe => {
-                recipe.ingredients.forEach(item =>{
+            for (let recipe of recipesToDisplay){
+                for (let item of recipe.ingredients){
                     if(item.ingredient.toLowerCase().includes(userInput)) {
                         ingredientsSearchResult.push(item.ingredient)
                     }
-                })
-            })
+                }
+            }
             ingredientsSearchResult = removeDuplicates(ingredientsSearchResult);
             ingredientsSearchResult = ingredientsSearchResult.sort();
             //Reset de la liste des ingredients
@@ -91,12 +91,11 @@ function setupEventFilterTagsSearch(filter){
             let appliancesSearchResult = [];
             const appliancesHTMLUL = document.querySelector('.dropdown-menu__options--appliances');
             const userInput = event.target.value.toLowerCase();
-
-            recipesToDisplay.forEach(recipe =>{
+            for (let recipe of recipesToDisplay){
                 if(recipe.appliance.toLowerCase().includes(userInput)) {
                     appliancesSearchResult.push(recipe.appliance)
                 }
-            })
+            }
             appliancesSearchResult = removeDuplicates(appliancesSearchResult);
             appliancesSearchResult = appliancesSearchResult.sort();
             //Reset de la liste des appareils
@@ -117,14 +116,13 @@ function setupEventFilterTagsSearch(filter){
             let ustensilsSearchResult=[];
             const ustensilsHTMLUL = document.querySelector('.dropdown-menu__options--ustensils')
             const userInput = event.target.value.toLowerCase();
-
-            recipesToDisplay.forEach(recipe => {
-                recipe.ustensils.forEach(item =>{
+            for (let recipe of recipesToDisplay) {
+                for (let  item of recipe.ustensils) {
                     if(item.toLowerCase().includes(userInput)) {
                         ustensilsSearchResult.push(item)
                     }
-                })
-            })
+                }
+            }
             //Reset de la liste des ustensiles
             ustensilsHTMLUL.innerHTML="";
             ustensilsSearchResult =removeDuplicates(ustensilsSearchResult);
