@@ -38,8 +38,7 @@ function setupEventCreateTags(type){
     if(type==="Ingredients") {
         const listItems = document.querySelectorAll(".dropdown-menu__option-item--ingredients");
         const searchInput = document.getElementById("form-control");
-
-        listItems.forEach(item=>{
+        for (let item of listItems){
             item.addEventListener('click',event => {
                 let tag = event.target.textContent;
                 //Si le tag existe alors ne fait rien
@@ -53,12 +52,11 @@ function setupEventCreateTags(type){
                     setupEventDeleteTags('ingredient');
                 }
             })
-        })
+        }
     }else if(type==="Appliances"){
         const listItems = document.querySelectorAll(".dropdown-menu__options-item--appliances");
         const searchInput = document.getElementById("form-control");
-
-        listItems.forEach(item=>{
+        for (let item of listItems){
             item.addEventListener('click',event => {
                 let tag = event.target.textContent;
                 if(!appliancesTab.includes(tag)){
@@ -70,12 +68,12 @@ function setupEventCreateTags(type){
                     setupEventDeleteTags('appliance')
                 }
             })
-        })
+        }
+
     }else if(type==="Ustensils"){
         const listItems = document.querySelectorAll(".dropdown-menu__options-item--ustensils");
         const searchInput = document.getElementById("form-control");
-
-        listItems.forEach(item=>{
+        for (let item of listItems) {
             item.addEventListener('click',event => {
                 let tag = event.target.textContent;
                 if(!ustensilsTab.includes(tag)){
@@ -87,7 +85,7 @@ function setupEventCreateTags(type){
                     setupEventDeleteTags('ustensils');
                 }
             })
-        })
+        }
     }
 }
 
@@ -101,7 +99,7 @@ function createTag(tag,type){
     if(type==="ingredient"){
 
         const tagsContainer = document.querySelectorAll('.tags-container__tags-for-ingredients');
-        tagsContainer.forEach( container => {
+        for (let container of tagsContainer) {
             const tagItem = document.createElement('div');
             tagItem.classList.add("tags-container__tag","tags-container-parent", "tags-container__tag--ingredients-bg");
             tagItem.innerHTML=`
@@ -115,12 +113,10 @@ function createTag(tag,type){
                     </button>
                 </div>`;
             container.appendChild(tagItem);
-        })
+        }
     } else if (type === "appliance") {
         const tagsContainer = document.querySelectorAll('.tags-container__tags-for-appliances');
-
-        tagsContainer.forEach( container => {
-
+        for (let container of tagsContainer) {
             const tagItem = document.createElement('div');
             tagItem.classList.add("tags-container__tag","tags-container-parent", "tags-container__tag--appliances-bg");
             tagItem.innerHTML=`
@@ -134,13 +130,11 @@ function createTag(tag,type){
                     </button>
                 </div>`;
             container.appendChild(tagItem);
-        })
+        }
 
     } else if (type === "ustensils") {
         const tagsContainer = document.querySelectorAll('.tags-container__tags-for-ustensils');
-
-        tagsContainer.forEach( container => {
-
+        for (let container of tagsContainer) {
             const tagItem = document.createElement('div');
             tagItem.classList.add("tags-container__tag","tags-container-parent", "tags-container__tag--ustensils-bg");
             tagItem.innerHTML=`
@@ -154,7 +148,7 @@ function createTag(tag,type){
                     </button>
                 </div>`;
             container.appendChild(tagItem);
-        })
+        }
     }
 }
 
@@ -166,7 +160,7 @@ function createTag(tag,type){
 function setupEventDeleteTags(type){
 
     const buttonsCloseTag = document.querySelectorAll(".tags-container__tag-close-button");
-    buttonsCloseTag.forEach(button => {
+    for (let button of buttonsCloseTag) {
         button.addEventListener('click', (event) => {
             const tagDiv = button.closest(' .tags-container-parent ');
             const tagText = event.currentTarget.previousElementSibling.textContent;
@@ -174,27 +168,27 @@ function setupEventDeleteTags(type){
             tagDiv.remove();
 
             if(type==="ingredient"){
-                 ingredientsTab.forEach(ingredient => {
+                for (let ingredient of ingredientsTab) {
                     if(ingredient === tagText) {
                         ingredientsTab.splice(ingredientsTab.indexOf(ingredient),1);
                     }
-                })
+                }
             }else if (type ==='appliance'){
-                appliancesTab.forEach(appliance => {
+                for (let appliance of appliancesTab){
                     if(appliance === tagText) {
                         appliancesTab.splice(appliancesTab.indexOf(appliance),1);
                     }
-                })
+                }
             }else if(type === 'ustensils'){
-                ustensilsTab.forEach(ustensil => {
+                for (let ustensil of ustensilsTab) {
                     if(ustensil === tagText) {
                         ustensilsTab.splice(ustensilsTab.indexOf(ustensil),1);
                     }
-                })
+                }
             }
             mainSearchDisplay(searchInput.value)
         });
-    });
+    }
 }
 
 export {setupEventCreateTags,setupEventDeleteTags}
