@@ -93,96 +93,66 @@ function search(userInput) {
             if (ingredientsTab.length === 0) {
                 foundIngredientTags = true;
             } else {
-                console.log("hello")
                 /*Ce code utilise deux boucles for...of imbriquées pour parcourir les tableaux ingredientsTab et recipe.ingredients.
                 Pour chaque ingredientTag de ingredientsTab, on vérifie si on trouve un ingrédient correspondant dans recipe.ingredients.
                 Si c'est le cas, on passe à l'ingredientTag suivant. Si on ne trouve pas d'ingrédient correspondant,
                 on met la variable foundIngredientTags à false et on sort de la boucle.
                 À la fin, la variable foundIngredientTags contient true si tous les ingrédients de ingredientsTab
                 ont été trouvés dans recipe.ingredients, et false sinon. */
-                // recipe.ingredients = ["banane","sucre,","orange"]
-                // ingredientsTab     = ["banane"]
-                // ingredientsTab     = ["tomate"]
-
                 foundIngredientTags = true;
                 for (const ingredientTag of ingredientsTab) {
                     let foundIngredient = false;
                     for (const item of recipe.ingredients) {
                         if (ingredientTag.toLowerCase() === item.ingredient.toLowerCase()) {
                             foundIngredient = true;
+                            // console.log(recipe)
                             break;
                         }
                     }
                     if (!foundIngredient) {
                         foundIngredientTags = false;
-                        console.log("Valeur de foundIngredient : " +foundIngredient);
-                        console.log("Valeur de foundIngredientTags : "+ foundIngredientTags)
                         break;
                     }
                 }
-
-                // ingredientsTab.every(ingredientTag => {
-                //     recipe.ingredients.every(item => {
-                //         if (ingredientTag.toLowerCase() === item.ingredient.toLowerCase()) {
-                //             foundIngredientTags = true;
-                //             return false;
-                //         } else {
-                //             foundIngredientTags = false;
-                //             return true;
-                //         }
-                //     })
-                //     return foundIngredientTags;
-                // })
             }
+
             // Filtre Appareils
             if (appliancesTab.length === 0) {
                 foundApplianceTags = true;
             } else {
-                foundApplianceTags = false;
-                for (let applianceTag of appliancesTab) {
+                foundApplianceTags = true;
+                for (const applianceTag of appliancesTab) {
+                    let foundAppliance = false;
                     if(applianceTag.toLowerCase() === recipe.appliance.toLowerCase()){
-                        foundApplianceTags = true;
+                        foundAppliance = true;
+                        // console.log(recipe)
                         break;
-                    } else {
-                      foundApplianceTags = false;
+                    }
+                    if(!foundAppliance){
+                        foundApplianceTags = false;
+                        break;
                     }
                 }
-                // appliancesTab.every(applianceTag => {
-                //     if (applianceTag.toLowerCase() === recipe.appliance.toLowerCase()) {
-                //         foundApplianceTags = true;
-                //         return false;
-                //     } else {
-                //         foundApplianceTags = false;
-                //         return true;
-                //     }
-                // })
             }
             //Filtre Ustensiles
             if (ustensilsTab.length === 0) {
                 foundUstensilTags = true;
             } else {
-                foundUstensilTags = false;
-                for (let ustensilsTag of ustensilsTab){
-                    for (let item of recipe.ustensils) {
+                foundUstensilTags = true;
+                for (const ustensilsTag of ustensilsTab){
+                    let foundUstensil = false;
+                    for (const item of recipe.ustensils) {
                         if (ustensilsTag.toLowerCase() === item.toLowerCase()) {
-                            foundUstensilTags = true;
-                            break
-                        } else {
+                            foundUstensil = true;
+                            // console.log(recipe)
+                            break;
+                        }
+                        if (!foundUstensil){
                             foundUstensilTags = false;
+                            break;
                         }
                     }
                 }
-                // ustensilsTab.every(ustensilsTag => {
-                //     recipe.ustensils.every(item => {
-                //         if (ustensilsTag.toLowerCase() === item.toLowerCase()) {
-                //             foundUstensilTags = true;
-                //             return false;
-                //         } else {
-                //             foundUstensilTags = false;
-                //             return true;                        }
-                //     })
-                //     return foundUstensilTags;
-                // })
             }
         // On retourne la valeur des differents booleens a la fonction filter
         return found && foundIngredientTags && foundApplianceTags && foundUstensilTags;
