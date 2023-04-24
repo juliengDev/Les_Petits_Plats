@@ -1,0 +1,191 @@
+//components/ est utilisé pour ranger les blocs BEM qui sont plus indépendants, comme les boutons.
+
+.sort-inputs-container {
+  max-width: 870px;
+  //display: flex;
+  display: grid;
+  grid-template-rows: repeat(auto-fill,1fr);
+  grid-template-columns: repeat(3,1fr);
+  gap: 25px;
+  margin: 20px 0;
+  padding: 0;
+  @include my-breakpoint {
+    grid-template-columns: repeat(1,1fr);
+    margin-bottom: 10px;
+    gap: 10px;
+  };
+
+}
+//Dropdown Button
+.dropdown-menu {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+  width: 270px;
+  transition: width 450ms ease-out;
+    &--ingredients {
+      background-color: map-get($color, blue);
+    }
+    &--appliances {
+      background-color: map-get($color, green);
+    }
+    &--ustensils {
+      background-color: map-get($color,orange);
+    };
+    &__sort-input{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 25px;
+      background-color: transparent;
+      border:none;
+      color: map-get($color,white);
+      font-family: 'Lato', sans-serif;
+      font-size: map-get($font-size, dropdown-label);
+       &:hover{
+         cursor: text;
+       }
+    }
+    &__sort-label{
+      position: absolute;
+      right: 15px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      }
+    &__options {
+      width: 100%;
+      max-height: 450px;
+      position: absolute;
+      top:61px;
+      left: 0;
+      padding-left: 0;
+      color: map-get($color,white);
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      overflow-y: auto;
+      border-radius: 0.375rem;
+
+        &--ingredients {
+          background-color: map-get($color,blue);
+        }
+        &--appliances {
+          background-color: map-get($color,green);
+        }
+        &--ustensils {
+          background-color: map-get($color,orange);
+        }
+    }
+    &__option-item {
+      font-size: map-get($font-size,filter-label);
+      padding: 10px 20px;
+      margin: 5px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      cursor: pointer;
+      &--ingredients {
+        background-color: map-get($color,blue);
+      }
+      &--appareils {
+        background-color: map-get($color,green);
+      }
+      &--ustensiles {
+        background-color: map-get($color,orange);
+      }
+    }
+  &__extend {
+    width: 400px;
+    transition: width 250ms ease-out;
+    border-radius: 0.375rem;
+    @include my-breakpoint {
+      grid-template-columns: repeat(1, 1fr);
+
+    };
+  }
+}
+
+
+//Cards
+.cards-result-container {
+  display: flex;
+  justify-content: center;
+  //max-width: 1200px;
+
+}
+.card-container {
+  &__card {
+    width: 380px;
+    padding: 0;
+    &-img {
+      height: 178px;
+      background-color: #C7BEBE;
+      width: 100%;
+    }
+    &-body{
+      height: 210px;
+      padding: 0;
+      background-color: #E7E7E7;
+    }
+    &-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 10px;
+        & h2 {
+          margin: 0;
+          font-size: map-get($font-size,card-label);
+          font-weight: map-get($font-weight,regular);
+        }
+       &-timer {
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+         & i {
+           font-weight: map-get($font-weight,bold);
+         }
+         & p {
+           font-size: map-get($font-size,card-time-label);
+           padding: 0 0 0 10px ;
+           margin-bottom: 0;
+         }
+       }
+    }
+    &-description{
+      margin: 0 5px 10px 5px;
+      display: flex;
+      justify-content: space-between;
+      font-size: map-get($font-size,card-text-label);
+      &-ingredients{
+        max-height: 130px;
+        overflow-y: auto;
+      }
+      &-texte{
+        font-size: 12px;
+        display: -webkit-box;
+        -webkit-line-clamp: 7;
+        -webkit-box-orient: vertical;
+        overflow-y: auto;
+        //@include line-clamp(7, 1.25em);
+      }
+    }
+  }
+}
+
+//grid
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(1,1fr);
+  gap: 50px;
+  @include my-breakpoint {
+    grid-template-columns: repeat(1, 1fr);
+    max-width: 380px;
+  };
+   &-item{
+     justify-self: center;
+   }
+}
+
