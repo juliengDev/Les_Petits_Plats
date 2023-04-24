@@ -99,7 +99,7 @@ function createItemDropdown(type,tab){
 
     if(type === "htmlTagsIngredientsItemTab") {
         for (let element of tab) {
-            for (let element of tab){
+            for (let data of element.ingredients){
                 htmlTagsIngredientsItemTab.push(data.ingredient);
             }
         }
