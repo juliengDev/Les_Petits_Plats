@@ -1,12 +1,12 @@
 //components/ est utilisé pour ranger les blocs BEM qui sont plus indépendants, comme les boutons.
 
 .sort-inputs-container {
-  max-width: 1300px;
+  max-width: 870px;
   //display: flex;
   display: grid;
   grid-template-rows: repeat(auto-fill,1fr);
   grid-template-columns: repeat(3,1fr);
-  gap: 50px;
+  gap: 25px;
   margin: 20px 0;
   padding: 0;
   @include my-breakpoint {
@@ -25,12 +25,6 @@
   height: 70px;
   width: 270px;
   transition: width 450ms ease-out;
-  @include my-breakpoint {
-
-
-  };
-
-
     &--ingredients {
       background-color: map-get($color, blue);
     }
@@ -62,17 +56,17 @@
       cursor: pointer;
       }
     &__options {
-      //z-index: 1;
       width: 100%;
+      max-height: 450px;
       position: absolute;
-      top:65px;
+      top:61px;
       left: 0;
       padding-left: 0;
       color: map-get($color,white);
       display: grid;
-      //grid-template-rows: repeat(auto-fill,1fr);
       grid-template-columns: repeat(3,1fr);
-
+      overflow-y: auto;
+      border-radius: 0.375rem;
 
         &--ingredients {
           background-color: map-get($color,blue);
@@ -105,9 +99,10 @@
   &__extend {
     width: 400px;
     transition: width 250ms ease-out;
+    border-radius: 0.375rem;
     @include my-breakpoint {
       grid-template-columns: repeat(1, 1fr);
-      max-width: 430px;
+
     };
   }
 }
@@ -122,14 +117,15 @@
 }
 .card-container {
   &__card {
+    width: 380px;
     padding: 0;
-
     &-img {
       height: 178px;
       background-color: #C7BEBE;
       width: 100%;
     }
     &-body{
+      height: 210px;
       padding: 0;
       background-color: #E7E7E7;
     }
@@ -158,14 +154,21 @@
        }
     }
     &-description{
-      margin: 0 5px 30px 5px;
+      margin: 0 5px 10px 5px;
       display: flex;
       justify-content: space-between;
       font-size: map-get($font-size,card-text-label);
-
-      & p {
-        margin:0;
-        padding: 0;
+      &-ingredients{
+        max-height: 130px;
+        overflow-y: auto;
+      }
+      &-texte{
+        font-size: 12px;
+        display: -webkit-box;
+        -webkit-line-clamp: 7;
+        -webkit-box-orient: vertical;
+        overflow-y: auto;
+        //@include line-clamp(7, 1.25em);
       }
     }
   }
