@@ -34,7 +34,8 @@
   margin: 0 100px;
 }
 .input-search-container {
-
+  display: flex;
+  flex-direction: column;
   max-width: 1240px;
 }
 .search-bar {
@@ -52,4 +53,63 @@
     top:50%;
     transform: translateY(-50%);
   }
+  &__error {
+    margin: 5px;
+    font-family: 'DM Sans', sans-serif;
+    color: map-get($color, red);
+  }
+}
+
+.tags-container {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 25px;
+    & .main-index-tags{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    &__tag {
+      width: auto;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      border-radius: 5px;
+      color: map-get($color,white);
+      padding: 10px;
+        &--ingredients-bg{
+          background-color: map-get($color, blue)
+        }
+        &--appliances-bg {
+          background-color: map-get($color, green);
+        }
+        &--ustensils-bg {
+          background-color: map-get($color,orange);
+        }
+        &-close-button {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-content: center;
+          gap: 0;
+          aspect-ratio: 1/1;
+          height: 20px;
+          border: none;
+          background-color: rgba(0,0,0,0);
+        }
+    }
+
+    &__tags-for-appliances{
+
+    }
+    &__tags-for-ustensils{
+
+    }
+
 }
