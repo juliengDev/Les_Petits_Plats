@@ -5,7 +5,7 @@ const sortLabelIconUstensiles = document.getElementById('dropdown-menu__sort-ust
 function toggleDropDownListIngredients() {
     const dropdownMenuIngredients = document.querySelector(".dropdown-menu--ingredients");
     const listByIngredients = document.querySelector('.dropdown-menu__options--ingredients');
-    const inputIngredients = document.getElementById("sort-by-ingredients")
+    const inputIngredients = document.getElementById("sort-by-ingredients");
     toggleDropdownList(dropdownMenuIngredients,listByIngredients,inputIngredients,"ingredients");
 }
 function toggleDropDownListAppareils() {
